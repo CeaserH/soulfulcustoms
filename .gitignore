@@ -21,6 +21,7 @@ Production build folder (might be 'dist' or 'build')
 /dist
 /out
 /public/build
+/.parcel-cache
 
 Temporary Files
 
