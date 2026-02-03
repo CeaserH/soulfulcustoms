@@ -1,62 +1,47 @@
-Standard React Project .gitignore
+# =========================
+# Dependencies
+# =========================
+node_modules/
 
-Prevents committing dependencies, build files, and temporary artifacts.
-
-Dependency Folders
-
-Node.js dependencies
-
-/node_modules
-
-Yarn 2/3 dependencies
-
-.yarn/cache
+# Yarn 2/3
+.yarn/cache/
 .pnp.*
 
-Build Artifacts
+# =========================
+# Build Artifacts
+# =========================
+build/
+dist/
+out/
+public/build/
 
-Production build folder (might be 'dist' or 'build')
+# Parcel cache (CRITICAL)
+.parcel-cache/
 
-/build
-/dist
-/out
-/public/build
-/.parcel-cache
-
-Temporary Files
-
-Logs
-
-.log
-npm-debug.log
+# =========================
+# Logs & Temp Files
+# =========================
+*.log
+npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-.npm
+.npm/
 
-IDE and Editor Folders/Files
-
-Visual Studio Code
-
-.vscode/
-
-IntelliJ/Webstorm
-
-.idea/
-
-Environment and Config Files
-
-Environment variables (Crucial: never commit secrets or API keys)
-
+# =========================
+# Environment / Secrets
+# =========================
 .env
-.env.development
-.env.production
-.env.local
-
-Local config file
-
+.env.*
 config.local.json
 
-Operating System Files
+# =========================
+# IDE / Editor
+# =========================
+.vscode/
+.idea/
 
-.DS_Store # macOS
-Thumbs.db # Windows
+# =========================
+# OS Files
+# =========================
+.DS_Store
+Thumbs.db
