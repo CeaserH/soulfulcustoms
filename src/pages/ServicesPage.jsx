@@ -12,7 +12,7 @@ import {
   CheckCircle2,
 } from "lucide-react";
 
-const LABOR_RATE = "$100 / hr";
+const LABOR_RATE = "$90 / hr";
 
 const servicesData = [
   {
