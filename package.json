@@ -19,7 +19,9 @@
     "react-router-dom": "^6.14.2"
   },
   "devDependencies": {
+    "@parcel/packager-raw-url": "^2.16.3",
     "@parcel/transformer-js": "^2.12.0",
+    "@parcel/transformer-jsonld": "^2.16.3",
     "buffer": "^6.0.3",
     "gh-pages": "^6.1.1",
     "parcel": "^2.12.0",
