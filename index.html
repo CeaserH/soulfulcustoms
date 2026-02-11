@@ -6,31 +6,47 @@
   <title>Vallejo Tech - Computer Repair Services</title>
 
   <!-- Primary SEO -->
-<meta name="description" content="Vallejo Tech provides honest, local PC & laptop repair in Vallejo and Solano County. Virus removal, hardware repair, upgrades, data services, and custom builds. No fix, no fee." />
-<meta name="keywords" content="Vallejo computer repair, Solano County PC repair, laptop repair Vallejo, virus removal, computer diagnostics, data recovery, custom PC builds" />
-<meta name="author" content="Vallejo Tech" />
+  <meta name="description" content="Vallejo Tech provides honest, local PC & laptop repair in Vallejo and Solano County. Virus removal, hardware repair, upgrades, data services, and custom builds. No fix, no fee." />
+  <meta name="keywords" content="Vallejo computer repair, Solano County PC repair, laptop repair Vallejo, virus removal, computer diagnostics, data recovery, custom PC builds" />
+  <meta name="author" content="Vallejo Tech" />
 
-<!-- Viewport (already have, keep it) -->
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Viewport (already have, keep it) -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<!-- Open Graph (Facebook, iMessage, LinkedIn, etc) -->
-<meta property="og:title" content="Vallejo Tech — Honest Local Computer Repair" />
-<meta property="og:description" content="Professional PC & laptop repair in Vallejo and Solano County. No fix, no fee. Appointments and consultations are always free." />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://vallejotech.org" />
-<meta property="og:image" content="https://raw.githubusercontent.com/CeaserH/logo/main/logo.png" />
+  <!-- Open Graph (Facebook, iMessage, LinkedIn, etc) -->
+  <meta property="og:title" content="Vallejo Tech — Honest Local Computer Repair" />
+  <meta property="og:description" content="Professional PC & laptop repair in Vallejo and Solano County. No fix, no fee. Appointments and consultations are always free." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://vallejotech.org" />
+  <meta property="og:image" content="https://raw.githubusercontent.com/CeaserH/logo/main/logo.png" />
 
-<!-- Twitter / X -->
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Vallejo Tech — Honest Local Computer Repair" />
-<meta name="twitter:description" content="PC & laptop repair in Vallejo and Solano County. No fix, no fee. Free consultation." />
-<meta name="twitter:image" content="https://raw.githubusercontent.com/CeaserH/logo/main/logo.png" />
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Vallejo Tech — Honest Local Computer Repair" />
+  <meta name="twitter:description" content="PC & laptop repair in Vallejo and Solano County. No fix, no fee. Free consultation." />
+  <meta name="twitter:image" content="https://raw.githubusercontent.com/CeaserH/logo/main/logo.png" />
 
-<!-- Mobile / Theme -->
-<meta name="theme-color" content="#0a0a0a" />
-<meta name="apple-mobile-web-app-capable" content="yes" />
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <!-- Mobile / Theme -->
+  <meta name="theme-color" content="#0a0a0a" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
+  <!-- ✅ Structured Data (Google Logo / Business Entity) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Vallejo Tech",
+    "url": "https://vallejotech.org",
+    "logo": "https://raw.githubusercontent.com/CeaserH/logo/main/logo.png",
+    "image": "https://raw.githubusercontent.com/CeaserH/logo/main/logo.png",
+    "description": "Vallejo Tech provides honest, local PC & laptop repair in Vallejo and Solano County. Virus removal, hardware repair, upgrades, data services, and custom builds. No fix, no fee.",
+    "areaServed": {
+      "@type": "AdministrativeArea",
+      "name": "Solano County, CA"
+    }
+  }
+  </script>
 
   <!-- Tailwind CSS CDN (OK for development; we can move to build-time later) -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -41,30 +57,28 @@
   </style>
 
   <link
-  rel="icon"
-  type="image/png"
-  href="https://raw.githubusercontent.com/CeaserH/logo/main/logosmall.png"
+    rel="icon"
+    type="image/png"
+    href="https://raw.githubusercontent.com/CeaserH/logo/main/logosmall.png"
   />
-
 </head>
 
 <body>
   <div id="root"></div>
 
   <script>
-  (function () {
-    var path = sessionStorage.getItem("spa:path");
-    if (path) {
-      var search = sessionStorage.getItem("spa:search") || "";
-      var hash = sessionStorage.getItem("spa:hash") || "";
-      sessionStorage.removeItem("spa:path");
-      sessionStorage.removeItem("spa:search");
-      sessionStorage.removeItem("spa:hash");
-      history.replaceState(null, "", path + search + hash);
-    }
-  })();
-</script>
-
+    (function () {
+      var path = sessionStorage.getItem("spa:path");
+      if (path) {
+        var search = sessionStorage.getItem("spa:search") || "";
+        var hash = sessionStorage.getItem("spa:hash") || "";
+        sessionStorage.removeItem("spa:path");
+        sessionStorage.removeItem("spa:search");
+        sessionStorage.removeItem("spa:hash");
+        history.replaceState(null, "", path + search + hash);
+      }
+    })();
+  </script>
 
   <!-- Parcel entry -->
   <script type="module" src="./src/main.jsx"></script>
