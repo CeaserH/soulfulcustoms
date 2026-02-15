@@ -84,11 +84,11 @@ export default function ContactPage() {
 
             <div className="space-y-2 text-sm">
               <div className="flex justify-between border-b border-white/10 pb-1">
-                <span className="text-gray-300">Monday – Friday</span>
-                <span className="text-white font-bold">8:30 AM – 4:00 PM</span>
+                <span className="text-gray-300">Monday – Saturday</span>
+                <span className="text-white font-bold">9:00 AM – 5:00 PM</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-gray-300">Saturday – Sunday</span>
+                <span className="text-gray-300">Sunday</span>
                 <span className="text-gray-500 font-black uppercase text-xs">
                   Closed
                 </span>
