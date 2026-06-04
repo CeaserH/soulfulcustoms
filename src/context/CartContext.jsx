@@ -1,147 +1,135 @@
-import {
+import { createContext, useContext, useState, useEffect } from "react";
 
-createContext,
-useContext,
-useEffect,
-useState
+const CartContext = createContext();
 
-} from "react";
+export function CartProvider({ children }) {
+  const [cart, setCart] = useState(() => {
+    const saved = localStorage.getItem("cart");
 
-const CartContext =
-createContext();
+    return saved ? JSON.parse(saved) : [];
+  });
 
-export function CartProvider({
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
 
-children
+  const buildUploads = (count) => {
+    return Array.from({
+      length: count,
+    }).map(() => ({
+      file: null,
 
-}){
+      uploadedId: null,
 
-const [
+      note: "",
 
-cart,
+      hasPhrase: false,
 
-setCart
+      customPhrase: "",
+    }));
+  };
 
-]=useState(()=>{
+  const getUploadSlots = (product, quantity = 1) => {
+    if (product.selectedOption?.id === "doubleDifferent") {
+      return quantity * 2;
+    }
 
-const saved=
+    if (product.requiredUploads) {
+      return product.requiredUploads * quantity;
+    }
 
-localStorage.getItem(
-"cart"
-);
+    return quantity;
+  };
 
-return saved
+  const addToCart = (product) => {
+    setCart((prev) => {
+      // Custom project products
+      // ALWAYS create a new cart item
 
-?
+      if (product.isCustomProject) {
+        return [
+          ...prev,
 
-JSON.parse(saved)
+          {
+            ...product,
 
-:
+            cartItemId: crypto.randomUUID(),
 
-[];
+            quantity: 1,
 
-});
+            childName: product.childName || "",
 
-useEffect(()=>{
+            uploads: buildUploads(getUploadSlots(product)),
+          },
+        ];
+      }
 
-localStorage.setItem(
+      const existing = prev.find((item) => {
+        if (item.id !== product.id) {
+          return false;
+        }
 
-"cart",
+        if (item.selectedOption?.label !== product.selectedOption?.label) {
+          return false;
+        }
 
-JSON.stringify(
-cart
-)
+        return true;
+      });
 
-);
+      if (existing) {
+        return prev.map((item) => {
+          if (
+            item.id !== product.id ||
+            item.selectedOption?.label !== product.selectedOption?.label
+          ) {
+            return item;
+          }
 
-},[cart]);
+          const qty = item.quantity + 1;
 
-const addToCart=(product)=>{
+          const uploadSlots = getUploadSlots(item, qty);
 
-setCart(prev=>{
+          return {
+            ...item,
 
-const existing=
+            quantity: qty,
 
-prev.find(
+            uploads: buildUploads(uploadSlots),
+          };
+        });
+      }
 
-item=>
+      return [
+        ...prev,
 
-item.id===product.id
+        {
+          ...product,
 
-);
+          cartItemId: crypto.randomUUID(),
 
-if(existing){
+          quantity: 1,
 
-return prev.map(
+          childName: product.childName || "",
 
-item=>
+          uploads: buildUploads(getUploadSlots(product)),
+        },
+      ];
+    });
+  };
 
-item.id===product.id
+  return (
+    <CartContext.Provider
+      value={{
+        cart,
 
-?
+        setCart,
 
-{
-
-...item,
-
-quantity:
-
-item.quantity+1
-
+        addToCart,
+      }}
+    >
+      {children}
+    </CartContext.Provider>
+  );
 }
 
-:
-
-item
-
-);
-
-}
-
-return [
-
-...prev,
-
-{
-
-...product,
-
-quantity:1
-
-}
-
-];
-
-});
-
-};
-
-return(
-
-<CartContext.Provider
-
-value={{
-
-cart,
-
-addToCart,
-
-setCart
-
-}}
-
->
-
-{children}
-
-</CartContext.Provider>
-
-);
-
-}
-
-export const useCart=
-
-()=>useContext(
-CartContext
-);
+export const useCart = () => useContext(CartContext);

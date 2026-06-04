@@ -1,47 +1,135 @@
-import products
-from "../data/products";
+import { useState } from "react";
 
-import ProductCard
-from "../components/ProductCard";
+import products from "../data/products";
 
-export default function Shop(){
+import ProductCard from "../components/ProductCard";
 
-return(
+import ProductModal from "../components/ProductModal";
 
-<section className="shopPage">
+export default function Shop() {
+  const [selectedProduct, setSelectedProduct] = useState(null);
 
-<h1>
+  const fathersDayProducts = products.filter(
+    (product) => product.category === "Father's Day",
+  );
 
-Canvas Collection
+  const graduationProducts = products.filter(
+    (product) => product.category === "Graduation",
+  );
 
-</h1>
+  const glassFrames = products.filter(
+    (product) => product.category === "Glass",
+  );
 
-<div className="productGrid">
+  const slateFrames = products.filter(
+    (product) => product.category === "Slate",
+  );
 
-{
+  const tags = products.filter((product) => product.category === "Tags");
 
-products.map(
+  return (
+    <section className="shopPage">
+      <h1>Custom Collection</h1>
 
-product=>(
+      <div className="shopCategory">
+        <h2>Father's Day Collection</h2>
 
-<ProductCard
+        <p className="categoryDescription">
+          Meaningful personalized gifts designed to celebrate Dad.
+        </p>
 
-key={product.id}
+        <div className="productGrid">
+          {fathersDayProducts.map((product) => (
+            <ProductCard
+              key={product.id}
+              product={product}
+              onClick={() => setSelectedProduct(product)}
+            />
+          ))}
+        </div>
+      </div>
 
-product={product}
+      <div className="shopCategory">
+        <h2>Graduation Collection</h2>
 
-/>
+        <p className="categoryDescription">
+          Personalized graduation keepsakes, apparel, and commemorative gifts.
+        </p>
 
-)
+        <div className="productGrid">
+          {graduationProducts.map((product) => (
+            <ProductCard
+              key={product.id}
+              product={product}
+              onClick={() => setSelectedProduct(product)}
+            />
+          ))}
+        </div>
+      </div>
 
-)
+      <div className="shopCategory">
+        <h2>Glass Frames</h2>
 
-}
+        <p className="categoryDescription">
+          Premium glass keepsakes with vibrant photo reproduction and elegant
+          display stands.
+        </p>
 
-</div>
+        <div className="productGrid">
+          {glassFrames.map((product) => (
+            <ProductCard
+              key={product.id}
+              product={product}
+              onClick={() => setSelectedProduct(product)}
+            />
+          ))}
+        </div>
+      </div>
 
-</section>
+      <div className="shopCategory">
+        <h2>Slate Frames</h2>
 
-);
+        <p className="categoryDescription">
+          Natural stone photo displays crafted to preserve life's most
+          meaningful moments.
+        </p>
 
+        <div className="productGrid">
+          {slateFrames.map((product) => (
+            <ProductCard
+              key={product.id}
+              product={product}
+              onClick={() => setSelectedProduct(product)}
+            />
+          ))}
+        </div>
+      </div>
+
+      <div className="shopCategory">
+        <h2>Sports & Luggage Tags</h2>
+
+        <p className="categoryDescription">
+          Personalized tags perfect for athletes, teams, travel, and everyday
+          identification.
+        </p>
+
+        <div className="productGrid">
+          {tags.map((product) => (
+            <ProductCard
+              key={product.id}
+              product={product}
+              onClick={() => setSelectedProduct(product)}
+            />
+          ))}
+        </div>
+      </div>
+
+      {selectedProduct && (
+        <ProductModal
+          product={selectedProduct}
+          onClose={() => setSelectedProduct(null)}
+        />
+      )}
+    </section>
+  );
 }

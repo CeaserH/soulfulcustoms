@@ -1,71 +1,54 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
-import logo from "../assets/logo.png";
+import { Link } from "react-router-dom";
+import HeroMarquee from "../components/HeroMarquee";
+
+const logo = new URL("../assets/newlogotrans.png", import.meta.url).href;
 
 export default function Home() {
+  return (
+    <section className="luxHero">
+      <HeroMarquee />
+      <div className="heroOverlay"></div>
 
-    return (
+      <img src={logo} className="luxLogo" alt="Soulful Customs" />
 
-        <section className="luxHero">
+      <h1>Preserve Your Moments</h1>
 
-            <div className="heroOverlay"></div>
+      <p>
+        Museum-quality photography prints, premium finishes, handcrafted
+        presentation.
+      </p>
 
-            <img
-                src={logo}
-                className="luxLogo"
-                alt=""
-            />
+      <div className="heroButtons">
+        <Link to="/shop" className="primaryBtn">
+          Order Prints
+        </Link>
 
-            <h1>
+        <Link to="/about" className="secondaryBtn">
+          Our Story
+        </Link>
+      </div>
 
-                Preserve
-                Your
-                Moments
+      <div className="heroTags">
+        <span>Custom Prints</span>
 
-            </h1>
+        <span>•</span>
 
-            <p>
+        <span>Canvas</span>
 
-                Museum-quality photography prints,
-                premium finishes,
-                handcrafted presentation.
+        <span>•</span>
 
-            </p>
+        <span>Portraits</span>
 
-            <div className="heroButtons">
+        <span>•</span>
 
-                <Link
-                    to="/order"
-                    className="primaryBtn"
-                >
-                    Order Prints
-                </Link>
+        <span>Wall Art</span>
 
-                <Link
-                    to="/about"
-                    className="secondaryBtn"
-                >
-                    Our Story
-                </Link>
+        <span>•</span>
 
-            </div>
-
-            <section className="brandStrip">
-
-<div className="colorLine"></div>
-
-<p>
-
-Custom Prints • Canvas • Portraits • Wall Art • Keepsakes
-
-</p>
-
-<div className="colorLine"></div>
-
-</section>
-
-        </section>
-
-    );
+        <span>Keepsakes</span>
+      </div>
+    </section>
+  );
 }
