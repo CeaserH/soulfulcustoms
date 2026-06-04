@@ -1913,23 +1913,97 @@ nav a:hover,
 
 @media (max-width: 900px) {
   .navbar {
-    padding: 20px;
+    padding: 12px 16px;
 
     flex-direction: column;
 
-    gap: 20px;
+    gap: 12px;
+  }
+
+  .navLeft {
+    height: auto;
+  }
+
+  .navLogo {
+    height: 48px;
   }
 
   nav {
-    flex-wrap: wrap;
+    width: 100%;
+
+    display: flex;
 
     justify-content: center;
 
-    gap: 20px;
+    flex-wrap: wrap;
+
+    gap: 10px;
+  }
+
+  nav a {
+    font-size: 0.8rem;
+
+    letter-spacing: 1px;
+
+    padding: 8px 12px;
+
+    border-radius: 999px;
+  }
+
+  .activeNav {
+    background: rgba(212, 76, 127, 0.15);
+
+    -webkit-text-fill-color: white;
+
+    color: white;
+  }
+
+  .cartButton {
+    padding: 10px 16px;
+  }
+
+  .luxHero {
+    min-height: auto;
+
+    padding: 180px 20px 80px;
+  }
+
+  .luxLogo {
+    width: 95vw;
+
+    height: auto;
+
+    margin-top: 0;
+
+    margin-bottom: 10px;
+  }
+
+  .luxHero h1 {
+    margin-top: 0;
+
+    font-size: 2.25rem;
+  }
+
+  .luxHero p {
+    font-size: 1rem;
+
+    line-height: 1.7;
+  }
+
+  .heroButtons {
+    flex-direction: column;
+
+    align-items: center;
+
+    width: 100%;
+  }
+
+  .productGrid {
+    grid-template-columns: 1fr;
   }
 
   .checkoutPage {
-    padding: 150px 20px 80px;
+    padding: 180px 20px 80px;
   }
 
   .checkoutContainer {
@@ -1943,47 +2017,45 @@ nav a:hover,
   }
 
   .shopPage {
-    padding: 150px 20px 80px;
+    padding: 180px 20px 80px;
   }
 
-  .luxHero {
-    padding: 120px 20px;
+  .aboutCard {
+    margin-top: 180px;
+
+    padding: 30px 20px;
   }
 
-  .heroButtons {
-    flex-direction: column;
-
-    align-items: center;
-  }
-
-  .productGrid {
+  .contactGrid {
     grid-template-columns: 1fr;
   }
-}
 
-@media (max-width: 768px) {
-  .productModal {
-    grid-template-columns: 1fr;
-
-    width: 95vw;
-
-    padding: 24px;
-  }
-
-  .modalImage {
-    height: 280px;
+  .contactCard:last-child {
+    grid-column: auto;
   }
 }
 
 @media (max-width: 500px) {
   .navLogo {
-    height: 44px;
+    height: 40px;
   }
 
-  .luxLogo {
-    width: 95vw;
+  nav {
+    gap: 6px;
+  }
 
-    height: auto;
+  nav a {
+    font-size: 0.75rem;
+
+    padding: 6px 10px;
+  }
+
+  .luxHero {
+    padding: 170px 16px 60px;
+  }
+
+  .luxHero h1 {
+    font-size: 1.9rem;
   }
 
   .primaryBtn {
