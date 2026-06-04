@@ -1,0 +1,43 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+.parcel-cache/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment files
+.env
+.env.local
+.env.production
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Firebase
+firebase-debug.log
+
+# Cloudflare
+.wrangler/
+
+# Temporary uploads
+uploads/
+temp/
+
+# Parcel
+.cache/
+
+# Coverage
+coverage/
+
+# Generated files
+*.log
