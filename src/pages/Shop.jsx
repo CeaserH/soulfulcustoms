@@ -6,123 +6,116 @@ import ProductCard from "../components/ProductCard";
 
 import ProductModal from "../components/ProductModal";
 
+const hiddenSaleCategories = new Set(["Father's Day", "Graduation"]);
+
+const categorySections = [
+  {
+    title: "Limited-Time Presale",
+    category: "Back To School Presale",
+    description:
+      "Back to school bundle pricing available 7/11-7/18 while presale is open.",
+  },
+  {
+    title: "Back To School",
+    category: "Back to School",
+    description:
+      "Personalized school essentials, including the limited-time presale bundle.",
+  },
+  {
+    title: "Glass Frames",
+    category: "Glass",
+    description:
+      "Premium glass keepsakes with vibrant photo reproduction and elegant display stands.",
+  },
+  {
+    title: "Slate Frames",
+    category: "Slate",
+    description:
+      "Natural stone photo displays crafted to preserve life's most meaningful moments.",
+  },
+  {
+    title: "Sports & Luggage Tags",
+    category: "Tags",
+    description:
+      "Personalized tags perfect for athletes, teams, travel, and everyday identification.",
+  },
+  {
+    title: "ID/Badge Holders",
+    category: "ID/Badge Holders",
+    description:
+      "Custom holders for IDs, work badges, and teacher badge inserts with single or 3-pack pricing.",
+  },
+  {
+    title: "Button Pins",
+    category: "Button Pins",
+    description:
+      "Personalized button pins available in multiple sizes and bundle quantities.",
+  },
+  {
+    title: "Home Goods",
+    category: "Home Goods",
+    description:
+      "Useful custom pieces for home gifting, kitchens, and everyday keepsakes.",
+  },
+];
+
 export default function Shop() {
   const [selectedProduct, setSelectedProduct] = useState(null);
 
-  const fathersDayProducts = products.filter(
-    (product) => product.category === "Father's Day",
+  const visibleProducts = products.filter(
+    (product) => !hiddenSaleCategories.has(product.category),
   );
-
-  const graduationProducts = products.filter(
-    (product) => product.category === "Graduation",
-  );
-
-  const glassFrames = products.filter(
-    (product) => product.category === "Glass",
-  );
-
-  const slateFrames = products.filter(
-    (product) => product.category === "Slate",
-  );
-
-  const tags = products.filter((product) => product.category === "Tags");
 
   return (
     <section className="shopPage">
-      <h1>Custom Collection</h1>
-
-      <div className="shopCategory">
-        <h2>Father's Day Collection</h2>
-
-        <p className="categoryDescription">
-          Meaningful personalized gifts designed to celebrate Dad.
-        </p>
-
-        <div className="productGrid">
-          {fathersDayProducts.map((product) => (
-            <ProductCard
-              key={product.id}
-              product={product}
-              onClick={() => setSelectedProduct(product)}
-            />
-          ))}
+      <div className="shopHeader">
+        <div>
+          <span className="shopEyebrow">Shop</span>
+          <h1>Custom Collection</h1>
         </div>
+
+        <p>
+          Choose a product, select a size or style, then add any required
+          photos or notes at checkout.
+        </p>
       </div>
 
-      <div className="shopCategory">
-        <h2>Graduation Collection</h2>
+      {categorySections.map((section) => {
+        const sectionProducts = visibleProducts.filter(
+          (product) => product.category === section.category,
+        );
 
-        <p className="categoryDescription">
-          Personalized graduation keepsakes, apparel, and commemorative gifts.
-        </p>
+        if (sectionProducts.length === 0) {
+          return null;
+        }
 
-        <div className="productGrid">
-          {graduationProducts.map((product) => (
-            <ProductCard
-              key={product.id}
-              product={product}
-              onClick={() => setSelectedProduct(product)}
-            />
-          ))}
-        </div>
-      </div>
+        return (
+          <div className="shopCategory" key={section.category}>
+            <div className="shopCategoryHeader">
+              <div>
+                <h2>{section.title}</h2>
 
-      <div className="shopCategory">
-        <h2>Glass Frames</h2>
+                <p className="categoryDescription">{section.description}</p>
+              </div>
 
-        <p className="categoryDescription">
-          Premium glass keepsakes with vibrant photo reproduction and elegant
-          display stands.
-        </p>
+              <span className="categoryCount">
+                {sectionProducts.length}{" "}
+                {sectionProducts.length === 1 ? "item" : "items"}
+              </span>
+            </div>
 
-        <div className="productGrid">
-          {glassFrames.map((product) => (
-            <ProductCard
-              key={product.id}
-              product={product}
-              onClick={() => setSelectedProduct(product)}
-            />
-          ))}
-        </div>
-      </div>
-
-      <div className="shopCategory">
-        <h2>Slate Frames</h2>
-
-        <p className="categoryDescription">
-          Natural stone photo displays crafted to preserve life's most
-          meaningful moments.
-        </p>
-
-        <div className="productGrid">
-          {slateFrames.map((product) => (
-            <ProductCard
-              key={product.id}
-              product={product}
-              onClick={() => setSelectedProduct(product)}
-            />
-          ))}
-        </div>
-      </div>
-
-      <div className="shopCategory">
-        <h2>Sports & Luggage Tags</h2>
-
-        <p className="categoryDescription">
-          Personalized tags perfect for athletes, teams, travel, and everyday
-          identification.
-        </p>
-
-        <div className="productGrid">
-          {tags.map((product) => (
-            <ProductCard
-              key={product.id}
-              product={product}
-              onClick={() => setSelectedProduct(product)}
-            />
-          ))}
-        </div>
-      </div>
+            <div className="productGrid">
+              {sectionProducts.map((product) => (
+                <ProductCard
+                  key={product.id}
+                  product={product}
+                  onClick={() => setSelectedProduct(product)}
+                />
+              ))}
+            </div>
+          </div>
+        );
+      })}
 
       {selectedProduct && (
         <ProductModal

@@ -30,6 +30,10 @@ export function CartProvider({ children }) {
   };
 
   const getUploadSlots = (product, quantity = 1) => {
+    if (product.skipUploads) {
+      return 0;
+    }
+
     if (product.selectedOption?.id === "doubleDifferent") {
       return quantity * 2;
     }

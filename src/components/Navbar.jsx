@@ -17,7 +17,14 @@ export default function Navbar() {
     <header className="navbar">
       <div className="navLeft">
         <Link to="/" className="logoLink">
-          <img src={logo} alt="Soulful Customs" className="navLogo" />
+          <span className="navBrand" aria-label="Soulful Customs">
+            <img src={logo} alt="" className="navBrandMark" />
+
+            <span className="navBrandText">
+              <strong>SOULFUL</strong>
+              <span>CUSTOMS</span>
+            </span>
+          </span>
         </Link>
       </div>
 

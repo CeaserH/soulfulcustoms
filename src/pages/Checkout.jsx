@@ -20,8 +20,10 @@ export default function Checkout() {
   });
   const [checkoutError, setCheckoutError] = useState("");
   const [submittedOrder, setSubmittedOrder] = useState(null);
-  const [paymentStarted, setPaymentStarted] = useState(false);
-  const [paymentConfirmed, setPaymentConfirmed] = useState(false);
+  const [agreementScrolled, setAgreementScrolled] = useState(false);
+  const [agreementAccepted, setAgreementAccepted] = useState(false);
+  const [isSubmittingOrder, setIsSubmittingOrder] = useState(false);
+  const skipsUploads = (item) => item.skipUploads || item.id === 15;
 
   if (submittedOrder) {
     return (
@@ -30,13 +32,16 @@ export default function Checkout() {
           <div className="successCard">
             <h1>Thank You!</h1>
 
-            <p>Your order has been submitted successfully.</p>
+            <p>
+              Your order has been submitted successfully. PayPal has opened so
+              you can complete payment.
+            </p>
 
             <h2>Order #{submittedOrder.orderNumber}</h2>
 
             <p>
-              Soulful Customs will contact you by phone and/or email when your
-              order is ready for pickup.
+              Soulful Customs will confirm payment and contact you by phone
+              and/or email when your order is ready for pickup.
             </p>
           </div>
         </div>
@@ -101,9 +106,9 @@ export default function Checkout() {
         return false;
       }
 
-      const missingUpload = (item.uploads || []).some(
-        (upload) => !upload?.uploadedId,
-      );
+      const missingUpload =
+        !skipsUploads(item) &&
+        (item.uploads || []).some((upload) => !upload?.uploadedId);
 
       if (missingUpload) {
         setCheckoutError(
@@ -127,70 +132,108 @@ export default function Checkout() {
     return true;
   }
 
-  async function handleCheckout() {
+  function buildOrder(orderNumber) {
+    const orderItems = cart.map((item) => ({
+      cartItemId: item.cartItemId,
+
+      id: item.id,
+
+      name: item.name,
+
+      category: item.category,
+
+      selectedOption: {
+        label: item.selectedOption?.label || "",
+        dimensions: item.selectedOption?.dimensions || "",
+        price: item.selectedOption?.price || 0,
+        description: item.selectedOption?.description || "",
+        styles: item.selectedOption?.styles || [],
+        quantityLabel: item.selectedOption?.quantityLabel || "",
+      },
+
+      quantity: item.quantity,
+
+      childName: item.childName || "",
+
+      paragraph: item.paragraph || "",
+
+      uploads: (item.uploads || []).map((upload) => ({
+        file: upload.file || "",
+        uploadedId: upload.uploadedId || "",
+        note: upload.note || "",
+        hasPhrase: upload.hasPhrase || false,
+        customPhrase: upload.customPhrase || "",
+        uploadedAt: upload.uploadedAt || 0,
+      })),
+    }));
+
+    return {
+      orderNumber,
+
+      customer,
+
+      items: orderItems,
+
+      subtotal,
+
+      phraseCost,
+
+      taxAmount,
+
+      total,
+
+      status: "pending",
+
+      paymentMethod: "paypal-manual",
+
+      paymentStatus: "pending-verification",
+
+      paymentAmount: total,
+
+      agreementAccepted: true,
+
+      agreementAcceptedAt: new Date().toISOString(),
+    };
+  }
+
+  function handleAgreementScroll(e) {
+    const target = e.currentTarget;
+    const hasReachedBottom =
+      target.scrollTop + target.clientHeight >= target.scrollHeight - 8;
+
+    if (hasReachedBottom) {
+      setAgreementScrolled(true);
+    }
+  }
+
+  async function handlePayNow() {
     setCheckoutError("");
     if (!validateOrder()) {
       return;
     }
+
+    if (!agreementAccepted) {
+      setCheckoutError(
+        "Please read and accept the user agreement before payment.",
+      );
+
+      return;
+    }
+
+    setIsSubmittingOrder(true);
+
+    const paypalWindow = window.open("about:blank", "_blank");
+
     try {
       const orderNumber = generateOrderNumber();
 
-      const orderItems = cart.map((item) => ({
-        cartItemId: item.cartItemId,
+      await createOrder(buildOrder(orderNumber));
 
-        id: item.id,
-
-        name: item.name,
-
-        category: item.category,
-
-        selectedOption: {
-          label: item.selectedOption?.label || "",
-          dimensions: item.selectedOption?.dimensions || "",
-          price: item.selectedOption?.price || 0,
-          description: item.selectedOption?.description || "",
-        },
-
-        quantity: item.quantity,
-
-        childName: item.childName || "",
-
-        paragraph: item.paragraph || "",
-
-        uploads: item.uploads.map((upload) => ({
-          file: upload.file || "",
-          uploadedId: upload.uploadedId || "",
-          note: upload.note || "",
-          hasPhrase: upload.hasPhrase || false,
-          customPhrase: upload.customPhrase || "",
-          uploadedAt: upload.uploadedAt || 0,
-        })),
-      }));
-
-      const order = {
-        orderNumber,
-
-        customer,
-
-        items: orderItems,
-
-        subtotal,
-
-        phraseCost,
-
-        taxAmount,
-
-        total,
-
-        status: "pending",
-
-        paymentMethod: "paypal-manual",
-
-        paymentStatus: "pending-verification",
-
-        paymentAmount: total,
-      };
-      await createOrder(order);
+      if (paypalWindow) {
+        paypalWindow.location.href = PAYPAL_URL;
+      } else {
+        window.open(PAYPAL_URL, "_blank");
+      }
 
       setSubmittedOrder({
         orderNumber,
@@ -200,7 +243,13 @@ export default function Checkout() {
     } catch (err) {
       console.error(err);
 
+      if (paypalWindow) {
+        paypalWindow.close();
+      }
+
       alert("Checkout failed");
+    } finally {
+      setIsSubmittingOrder(false);
     }
   }
 
@@ -255,7 +304,9 @@ export default function Checkout() {
 
         let uploadCount;
 
-        if (item.selectedOption?.id === "doubleDifferent") {
+        if (skipsUploads(item)) {
+          uploadCount = 0;
+        } else if (item.selectedOption?.id === "doubleDifferent") {
           uploadCount = qty * 2;
         } else if (item.requiredUploads) {
           uploadCount = qty * item.requiredUploads;
@@ -296,6 +347,7 @@ export default function Checkout() {
       <div className="checkoutContainer">
         <div className="checkoutLeft">
           <h1>Shopping Cart</h1>
+          {cart.some((item) => !skipsUploads(item)) && (
           <div className="photoQualityNotice">
             <h4>📸 Photo Quality Notice</h4>
 
@@ -315,6 +367,7 @@ export default function Checkout() {
               by low-resolution photos submitted by the customer.
             </p>
           </div>
+          )}
           {cart.length === 0 && (
             <div className="emptyCart">
               <h2>Your Cart is Empty</h2>
@@ -334,7 +387,7 @@ export default function Checkout() {
                 <h3>{item.name}</h3>
 
                 <p className="itemSize">
-                  Size:{" "}
+                  Selection:{" "}
                   {item.selectedOption?.dimensions ||
                     item.selectedOption?.label}
                 </p>
@@ -346,8 +399,25 @@ export default function Checkout() {
                   <p>{item.selectedOption.description}</p>
                 )}
 
+                {item.selectedOption?.styles?.length > 0 && (
+                  <div className="selectedStylePreviewGrid">
+                    {item.selectedOption.styles.map((style) => (
+                      <div
+                        className="selectedStylePreview"
+                        key={`${item.cartItemId}-${style.badgeNumber}`}
+                      >
+                        <img src={style.image} alt={style.label} />
+
+                        <span>
+                          Holder {style.badgeNumber}: {style.label}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
                 <div className="quantityControl">
-                  {!item.isCustomProject && (
+                  {!item.isCustomProject && !skipsUploads(item) && (
                     <input
                       type="number"
                       min="1"
@@ -373,8 +443,9 @@ export default function Checkout() {
                   </button>
                 </div>
 
-                <div className="uploadSection">
-                  {(item.uploads || []).map((upload, index) => {
+                {!skipsUploads(item) && (
+                  <div className="uploadSection">
+                    {(item.uploads || []).map((upload, index) => {
                     const isDoubleDifferent =
                       item.selectedOption?.id === "doubleDifferent";
 
@@ -522,8 +593,9 @@ export default function Checkout() {
                           )}
                       </div>
                     );
-                  })}
-                </div>
+                    })}
+                  </div>
+                )}
                 {item.freeCustomPhrase && (
                   <div className="uploadCard">
                     <h4>Message / Paragraph</h4>
@@ -645,47 +717,94 @@ export default function Checkout() {
               />
             </div>
 
-            {!paymentStarted ? (
-              <button
-                className="primaryBtn"
-                onClick={() => {
-                  if (!validateOrder()) {
-                    return;
-                  }
+            <div className="userAgreementCard">
+              <div className="agreementHeader">
+                <span>Required</span>
+                <h3>User Agreement</h3>
+                <p>
+                  Please review the order, production, and refund terms before
+                  continuing to payment.
+                </p>
+              </div>
 
-                  window.open(PAYPAL_URL, "_blank");
-
-                  setPaymentStarted(true);
-                }}
+              <div
+                className="agreementScrollBox"
+                onScroll={handleAgreementScroll}
+                tabIndex="0"
               >
-                Pay Now
-              </button>
-            ) : (
-              <>
-                <div className="paymentConfirmation">
-                  <label className="paymentCheckbox">
-                    <input
-                      type="checkbox"
-                      checked={paymentConfirmed}
-                      onChange={(e) => setPaymentConfirmed(e.target.checked)}
-                    />
+                <section>
+                  <strong>Payment & Production</strong>
+                  <p>
+                    After payment has been received, your order will be
+                    confirmed, and production of your custom items will begin.
+                  </p>
+                </section>
 
-                    <span>
-                      I have submitted payment via PayPal and understand my
-                      order will not begin until payment is verified.
-                    </span>
-                  </label>
-                </div>
+                <section>
+                  <strong>Sublimation Printing Notice</strong>
+                  <p>
+                    All products are created using the sublimation printing
+                    process. Due to the nature of sublimation printing, slight
+                    variations in color and minor printing imperfections may
+                    occur. These variations are normal and do not affect the
+                    overall quality or functionality of the finished product.
+                  </p>
+                </section>
 
-                <button
-                  className="primaryBtn"
-                  onClick={handleCheckout}
-                  disabled={!paymentConfirmed}
-                >
-                  Submit Order
-                </button>
-              </>
-            )}
+                <section>
+                  <strong>Custom Order & Refund Policy</strong>
+                  <p>
+                    Because all items are custom-made specifically for your
+                    order, all sales are final. Once payment has been submitted,
+                    refunds, cancellations, or exchanges cannot be accepted.
+                    Customized products cannot be resold, so please review and
+                    approve your design carefully before completing your
+                    purchase.
+                  </p>
+                </section>
+
+                <section>
+                  <strong>Final Review</strong>
+                  <p>
+                    Please confirm all photos, names, phrases, badge holder
+                    styles, product options, and contact details are correct
+                    before paying. Soulful Customs will use the details provided
+                    in this checkout to prepare your order.
+                  </p>
+                </section>
+              </div>
+
+              {!agreementScrolled && (
+                <p className="agreementHint">
+                  Scroll to the bottom of the agreement to unlock acceptance.
+                </p>
+              )}
+
+              <label
+                className={`agreementCheckbox ${
+                  !agreementScrolled ? "agreementCheckboxDisabled" : ""
+                }`}
+              >
+                <input
+                  type="checkbox"
+                  checked={agreementAccepted}
+                  disabled={!agreementScrolled}
+                  onChange={(e) => setAgreementAccepted(e.target.checked)}
+                />
+
+                <span>
+                  I have read, understand, and agree to the user agreement.
+                </span>
+              </label>
+            </div>
+
+            <button
+              className="primaryBtn"
+              onClick={handlePayNow}
+              disabled={!agreementAccepted || isSubmittingOrder}
+            >
+              {isSubmittingOrder ? "Submitting Order..." : "Pay Now"}
+            </button>
           </div>
         )}
       </div>

@@ -22,7 +22,324 @@ const canvas14 = new URL("../assets/products/canvas14.jpeg", import.meta.url)
 
 const canvas15 = new URL("../assets/products/canvas15.jpeg", import.meta.url)
   .href;
+
+const backToSchoolLifestyle = new URL(
+  "../assets/products/lifestyle-back-to-school-bundle-v4.png",
+  import.meta.url,
+).href;
+
+const backpackLifestyle = new URL(
+  "../assets/products/lifestyle-backpack.png",
+  import.meta.url,
+).href;
+
+const pencilPouchLifestyle = new URL(
+  "../assets/products/lifestyle-pencil-pouch.png",
+  import.meta.url,
+).href;
+
+const lunchBagLifestyle = new URL(
+  "../assets/products/lifestyle-lunch-bag.png",
+  import.meta.url,
+).href;
+
+const idBadgeHoldersLifestyle = new URL(
+  "../assets/products/lifestyle-id-badge-holders-v2.png",
+  import.meta.url,
+).href;
+
+const buttonPinsLifestyle = new URL(
+  "../assets/products/lifestyle-button-pins.png",
+  import.meta.url,
+).href;
+
+const potHoldersLifestyle = new URL(
+  "../assets/products/lifestyle-pot-holders.png",
+  import.meta.url,
+).href;
+
+const rectangleGlassLifestyle = new URL(
+  "../assets/products/lifestyle-rectangle-glass-frame.png",
+  import.meta.url,
+).href;
+
+const lightUpGlassLifestyle = new URL(
+  "../assets/products/lifestyle-light-up-glass-frame.png",
+  import.meta.url,
+).href;
+
+const rectangleSlateLifestyle = new URL(
+  "../assets/products/lifestyle-rectangle-rock-slate.png",
+  import.meta.url,
+).href;
+
+const heartSlateLifestyle = new URL(
+  "../assets/products/lifestyle-heart-rock-slate.png",
+  import.meta.url,
+).href;
+
+const roundSlateLifestyle = new URL(
+  "../assets/products/lifestyle-round-rock-slate.png",
+  import.meta.url,
+).href;
+
+const sportsTagsLifestyle = new URL(
+  "../assets/products/lifestyle-sports-luggage-tags.png",
+  import.meta.url,
+).href;
+
+const idBadgeStyleImages = [
+  new URL("../assets/products/id-badges/badge-style-1.png", import.meta.url)
+    .href,
+  new URL("../assets/products/id-badges/badge-style-2.png", import.meta.url)
+    .href,
+  new URL("../assets/products/id-badges/badge-style-3.png", import.meta.url)
+    .href,
+  new URL("../assets/products/id-badges/badge-style-4.png", import.meta.url)
+    .href,
+  new URL("../assets/products/id-badges/badge-style-5.png", import.meta.url)
+    .href,
+  new URL("../assets/products/id-badges/badge-style-6.png", import.meta.url)
+    .href,
+  new URL("../assets/products/id-badges/badge-style-7.png", import.meta.url)
+    .href,
+  new URL("../assets/products/id-badges/badge-style-8.png", import.meta.url)
+    .href,
+  new URL("../assets/products/id-badges/badge-style-9.png", import.meta.url)
+    .href,
+  new URL("../assets/products/id-badges/badge-style-10.png", import.meta.url)
+    .href,
+  new URL("../assets/products/id-badges/badge-style-11.png", import.meta.url)
+    .href,
+  new URL("../assets/products/id-badges/badge-style-12.png", import.meta.url)
+    .href,
+];
+
+const idBadgeStyles = idBadgeStyleImages.map((image, index) => {
+  const styleNumber = index + 1;
+
+  return {
+    id: `style-${styleNumber}`,
+    label: `Style ${styleNumber}`,
+    styleNumber,
+    image,
+    description: '2.75" x 3.93" ID/badge holder.',
+  };
+});
+
+const idBadgeQuantities = [
+  {
+    id: "single",
+    label: "1 Badge",
+    description: '2.75" x 3.93" ID/badge holder.',
+    price: 12,
+  },
+  {
+    id: "three-pack",
+    label: "3 Badges",
+    description: '2.75" x 3.93" ID/badge holders. Bundle price for 3.',
+    price: 30,
+  },
+];
+
 const products = [
+  // BACK TO SCHOOL
+
+  {
+    id: 11,
+
+    name: "Back To School Presale Bundle",
+
+    description:
+      "Limited time 7/11-7/18. Includes a backpack, pencil pouch, and lunch bag.",
+
+    image: backToSchoolLifestyle,
+
+    basePrice: 65,
+
+    category: "Back To School Presale",
+
+    options: {
+      sizes: [
+        {
+          label: "Bundle",
+          dimensions: "Backpack, pencil pouch, and lunch bag",
+          price: 65,
+        },
+      ],
+    },
+  },
+
+  {
+    id: 12,
+
+    name: "Backpack",
+
+    description: 'Custom backpack, 16" tall.',
+
+    image: backpackLifestyle,
+
+    basePrice: 45,
+
+    category: "Back to School",
+
+    options: {
+      sizes: [
+        {
+          label: "Standard",
+          dimensions: '16" tall',
+          price: 45,
+        },
+      ],
+    },
+  },
+
+  {
+    id: 13,
+
+    name: "Pencil Pouch",
+
+    description: "Custom pencil pouch for school supplies and everyday carry.",
+
+    image: pencilPouchLifestyle,
+
+    basePrice: 8,
+
+    category: "Back to School",
+
+    options: {
+      sizes: [
+        {
+          label: "Standard",
+          dimensions: '4.72" x 8.27"',
+          price: 8,
+        },
+      ],
+    },
+  },
+
+  {
+    id: 14,
+
+    name: "Lunch Bag",
+
+    description: 'Custom lunch bag, 7.87" x 10.23" x 2.54".',
+
+    image: lunchBagLifestyle,
+
+    basePrice: 25,
+
+    category: "Back to School",
+
+    options: {
+      sizes: [
+        {
+          label: "Standard",
+          dimensions: '7.87" x 10.23" x 2.54"',
+          price: 25,
+        },
+      ],
+    },
+  },
+
+  // ID/BADGE HOLDERS, BUTTONS, AND HOME GOODS
+
+  {
+    id: 15,
+
+    name: "ID/Badge Holder",
+
+    description:
+      'Custom ID/badge holders, 2.75" x 3.93". Choose from 12 styles and order 1 or 3. NOTE: Holder only, lanyard not included.',
+
+    image: idBadgeHoldersLifestyle,
+
+    basePrice: 12,
+
+    category: "ID/Badge Holders",
+
+    skipUploads: true,
+
+    optionLabel: "Choose Holder Style",
+
+    quantityLabel: "Choose Quantity",
+
+    options: {
+      visualStyles: idBadgeStyles,
+      quantities: idBadgeQuantities,
+    },
+  },
+
+  {
+    id: 16,
+
+    name: "Button Pins",
+
+    description:
+      'Custom button pins available in 2.5" and 3" sizes with single and 5-pack pricing.',
+
+    image: buttonPinsLifestyle,
+
+    basePrice: 3,
+
+    category: "Button Pins",
+
+    optionLabel: "Choose Size / Quantity",
+
+    options: {
+      styles: [
+        {
+          id: "2-5-single",
+          label: '2.5" button - 1 pin',
+          description: 'Single 2.5" custom button pin.',
+          price: 3,
+        },
+        {
+          id: "2-5-five-pack",
+          label: '2.5" buttons - 5 pack',
+          description: 'Five 2.5" custom button pins.',
+          price: 10,
+        },
+        {
+          id: "3-single",
+          label: '3" button - 1 pin',
+          description: 'Single 3" custom button pin.',
+          price: 3.5,
+        },
+        {
+          id: "3-five-pack",
+          label: '3" buttons - 5 pack',
+          description: 'Five 3" custom button pins.',
+          price: 13,
+        },
+      ],
+    },
+  },
+
+  {
+    id: 17,
+
+    name: "Pot Holders",
+
+    description: 'Custom pot holders, 8.25" x 10". Sold as a set of 2.',
+
+    image: potHoldersLifestyle,
+
+    basePrice: 30,
+
+    category: "Home Goods",
+
+    options: {
+      sizes: [
+        {
+          label: "Set of 2",
+          dimensions: '8.25" x 10"',
+          price: 30,
+        },
+      ],
+    },
+  },
+
   // GLASS FRAMES
 
   {
@@ -32,7 +349,7 @@ const products = [
 
     description: "Custom Rectangle Glass Frame",
 
-    image: canvas6,
+    image: rectangleGlassLifestyle,
 
     basePrice: 10,
 
@@ -66,7 +383,7 @@ const products = [
 
     description: "LED Light Up Glass Frame",
 
-    image: canvas8,
+    image: lightUpGlassLifestyle,
 
     basePrice: 45,
 
@@ -92,7 +409,7 @@ const products = [
 
     description: "Custom Rectangle Rock Slate Frame",
 
-    image: canvas2,
+    image: rectangleSlateLifestyle,
 
     basePrice: 25,
 
@@ -121,7 +438,7 @@ const products = [
 
     description: "Custom Heart Rock Slate Frame",
 
-    image: canvas3,
+    image: heartSlateLifestyle,
 
     basePrice: 18,
 
@@ -150,7 +467,7 @@ const products = [
 
     description: "Custom Round Rock Slate Frame",
 
-    image: canvas1,
+    image: roundSlateLifestyle,
 
     basePrice: 18,
 
@@ -181,7 +498,7 @@ const products = [
 
     description: "Custom Sports Bag & Luggage Tags",
 
-    image: canvas10,
+    image: sportsTagsLifestyle,
 
     basePrice: 5,
 

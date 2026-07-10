@@ -33,16 +33,27 @@ export default function Contact() {
           </div>
 
           <div className="contactCard">
-            <h3>Instagram</h3>
+            <h3>Social Media</h3>
 
-            <a
-              href="https://instagram.com/soulful_customs_"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="contactLink"
-            >
-              @soulful_customs_
-            </a>
+            <div className="contactSocialLinks">
+              <a
+                href="https://instagram.com/soulful_customs_"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="contactLink"
+              >
+                Instagram
+              </a>
+
+              <a
+                href="https://www.facebook.com/profile.php?id=61591804949742&mibextid=wwXIfr"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="contactLink"
+              >
+                Facebook
+              </a>
+            </div>
           </div>
 
           <div className="contactCard">

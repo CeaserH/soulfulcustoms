@@ -320,6 +320,13 @@ export default function Admin() {
                             <strong>Phrase:</strong> {upload.customPhrase}
                           </p>
                         )}
+
+                        {upload.note && (
+                          <div className="adminUploadNote">
+                            <strong>Special Instructions</strong>
+                            <p>{upload.note}</p>
+                          </div>
+                        )}
                       </div>
                     ))}
                   </div>

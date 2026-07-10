@@ -1,54 +1,346 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { Link } from "react-router-dom";
-import HeroMarquee from "../components/HeroMarquee";
+import ProductCard from "../components/ProductCard";
+import ProductModal from "../components/ProductModal";
+import products from "../data/products";
 
-const logo = new URL("../assets/newlogotrans.png", import.meta.url).href;
+const glassLifestyle = new URL(
+  "../assets/hero/lifestyle-glass-frame.png",
+  import.meta.url,
+).href;
+const slateLifestyle = new URL(
+  "../assets/hero/lifestyle-slate-gift.png",
+  import.meta.url,
+).href;
+const tagLifestyle = new URL(
+  "../assets/hero/lifestyle-sports-tag.png",
+  import.meta.url,
+).href;
+const backToSchoolLifestyle = new URL(
+  "../assets/products/lifestyle-back-to-school-bundle-v4.png",
+  import.meta.url,
+).href;
+const idBadgesLifestyle = new URL(
+  "../assets/products/lifestyle-id-badge-holders-v2.png",
+  import.meta.url,
+).href;
+const buttonPinsLifestyle = new URL(
+  "../assets/products/lifestyle-button-pins.png",
+  import.meta.url,
+).href;
+const potHoldersLifestyle = new URL(
+  "../assets/products/lifestyle-pot-holders.png",
+  import.meta.url,
+).href;
+
+const heroTags = [
+  "Backpacks",
+  "Glass Frames",
+  "Slate Frames",
+  "Sports Tags",
+  "ID Holders",
+  "Button Pins",
+  "Pot Holders",
+];
+
+const hiddenSaleCategories = new Set(["Father's Day", "Graduation"]);
+
+const categoryHighlights = [
+  {
+    title: "Limited-Time Presale",
+    category: "Back To School Presale",
+    copy: "Bundle the backpack, lunch bag, and pencil pouch for presale savings.",
+  },
+  {
+    title: "Back To School",
+    category: "Back to School",
+    copy: "Personalized backpacks, lunch bags, pencil pouches, and presale bundles.",
+  },
+  {
+    title: "Glass Frames",
+    category: "Glass",
+    copy: "Glossy keepsakes with vivid photo color and clean display stands.",
+  },
+  {
+    title: "Slate Frames",
+    category: "Slate",
+    copy: "Natural stone pieces with organic edges and a substantial feel.",
+  },
+  {
+    title: "Sports & Luggage Tags",
+    category: "Tags",
+    copy: "Personalized tags for teams, travel bags, backpacks, and gifts.",
+  },
+];
+
+const howItWorks = [
+  {
+    step: "01",
+    title: "Choose your custom piece",
+    copy: "Pick the frame, school essential, badge, pin, or tag style that fits the moment.",
+  },
+  {
+    step: "02",
+    title: "Add your details",
+    copy: "Send the photos, style choices, and notes needed to personalize the piece.",
+  },
+  {
+    step: "03",
+    title: "Pickup locally",
+    copy: "Soulful Customs confirms details and lets you know when it is ready.",
+  },
+];
+
+const heroScenes = [
+  {
+    image: glassLifestyle,
+    title: "Rectangle Glass Frame",
+    label: "Glass frames",
+    headline: "Preserve Your Memories",
+    copy:
+      "Turn favorite photos into polished glass keepsakes made for shelves, desks, and everyday reminders.",
+  },
+  {
+    image: slateLifestyle,
+    title: "Heart Rock Slate",
+    label: "Slate frames",
+    headline: "Give Moments More Meaning",
+    copy:
+      "Create a heartfelt stone slate gift with natural texture, rich color, and a personal story behind it.",
+  },
+  {
+    image: tagLifestyle,
+    title: "Sports / Luggage Tags",
+    label: "Custom tags",
+    headline: "Make Everyday Gear Personal",
+    copy:
+      "Add custom photos, colors, and details to sports bags, backpacks, and luggage tags.",
+  },
+  {
+    image: backToSchoolLifestyle,
+    title: "Back To School Bundle",
+    label: "Limited-time presale",
+    headline: "Bundle The School Year",
+    copy:
+      "Match the backpack, lunch bag, and pencil pouch with a custom set made for the first day back.",
+  },
+  {
+    image: idBadgesLifestyle,
+    title: "ID/Badge Holders",
+    label: "Work-ready holders",
+    headline: "Make Badge Holders Personal",
+    copy:
+      "Choose a holder style for work IDs, teacher badges, event passes, and everyday credentials.",
+  },
+  {
+    image: buttonPinsLifestyle,
+    title: "Button Pins",
+    label: "Wearable details",
+    headline: "Wear Your Favorite Moments",
+    copy:
+      "Turn designs, photos, and little statements into button pins made for jackets, bags, and gifts.",
+  },
+  {
+    image: potHoldersLifestyle,
+    title: "Pot Holders",
+    label: "Home goods",
+    headline: "Bring Custom Into The Kitchen",
+    copy:
+      "Add personal artwork to practical home pieces that feel warm, useful, and gift-ready.",
+  },
+];
 
 export default function Home() {
+  const [selectedProduct, setSelectedProduct] = useState(null);
+
+  const visibleProducts = products.filter(
+    (product) => !hiddenSaleCategories.has(product.category),
+  );
+
+  const featuredProducts = [11, 1, 6]
+    .map((id) => visibleProducts.find((product) => product.id === id))
+    .filter(Boolean);
+
+  const galleryProducts = [1, 3, 4, 5, 6, 2]
+    .map((id) => visibleProducts.find((product) => product.id === id))
+    .filter(Boolean);
+
   return (
-    <section className="luxHero">
-      <HeroMarquee />
-      <div className="heroOverlay"></div>
+    <>
+      <section className="luxHero">
+        <div className="heroOverlay"></div>
 
-      <img src={logo} className="luxLogo" alt="Soulful Customs" />
+        <div className="heroContent">
+          <div className="heroCopy">
+            <div className="heroTextCarousel" aria-live="polite">
+              {heroScenes.map((scene, index) => (
+                <div
+                  className="heroTextSlide"
+                  key={scene.headline}
+                  style={{ "--scene-index": index }}
+                >
+                  <h1>{scene.headline}</h1>
 
-      <h1>Preserve Your Moments</h1>
+                  <p>{scene.copy}</p>
+                </div>
+              ))}
+            </div>
 
-      <p>
-        Museum-quality photography prints, premium finishes, handcrafted
-        presentation.
-      </p>
+            <div className="heroButtons">
+              <Link to="/shop" className="primaryBtn">
+                Order Prints
+              </Link>
 
-      <div className="heroButtons">
-        <Link to="/shop" className="primaryBtn">
-          Order Prints
-        </Link>
+              <Link to="/about" className="secondaryBtn">
+                Our Story
+              </Link>
+            </div>
 
-        <Link to="/about" className="secondaryBtn">
-          Our Story
-        </Link>
-      </div>
+            <div className="heroTags" aria-label="Featured product types">
+              {heroTags.map((tag) => (
+                <span key={tag}>{tag}</span>
+              ))}
+            </div>
+          </div>
 
-      <div className="heroTags">
-        <span>Custom Prints</span>
+          <div className="heroShowcase" aria-label="Product lifestyle scenes">
+            {heroScenes.map((scene, index) => (
+              <figure
+                className="heroScene"
+                key={scene.title}
+                style={{ "--scene-index": index }}
+              >
+                <img src={scene.image} alt={`${scene.title} lifestyle scene`} />
 
-        <span>•</span>
+                <figcaption>
+                  <span>{scene.label}</span>
+                  <strong>{scene.title}</strong>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
 
-        <span>Canvas</span>
+        <div className="heroBottomFade"></div>
+      </section>
 
-        <span>•</span>
+      <main className="homeStorefront">
+        <section className="homeIntroBand">
+          <div>
+            <span className="sectionEyebrow">Start here</span>
+            <h2>Custom pieces for the photos worth keeping close.</h2>
+          </div>
 
-        <span>Portraits</span>
+          <p>
+            Browse the core collection, add your details at checkout, and
+            Soulful Customs will prepare your order for local pickup.
+          </p>
+        </section>
 
-        <span>•</span>
+        <section className="homeCategoryGrid" aria-label="Shop by category">
+          {categoryHighlights.map((category) => {
+            const count = visibleProducts.filter(
+              (product) => product.category === category.category,
+            ).length;
 
-        <span>Wall Art</span>
+            return (
+              <Link
+                to="/shop"
+                className="homeCategoryCard"
+                key={category.category}
+              >
+                <span>{count} options</span>
+                <h3>{category.title}</h3>
+                <p>{category.copy}</p>
+              </Link>
+            );
+          })}
+        </section>
 
-        <span>•</span>
+        <section className="homeSplitSection">
+          <div>
+            <span className="sectionEyebrow">How it works</span>
+            <h2>A simple path from favorite photo to finished keepsake.</h2>
+          </div>
 
-        <span>Keepsakes</span>
-      </div>
-    </section>
+          <div className="processGrid">
+            {howItWorks.map((item) => (
+              <div className="processStep" key={item.step}>
+                <span>{item.step}</span>
+                <h3>{item.title}</h3>
+                <p>{item.copy}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="homeProductSection">
+          <div className="homeSectionHeader">
+            <div>
+              <span className="sectionEyebrow">Featured</span>
+              <h2>Popular ways to customize.</h2>
+            </div>
+
+            <Link to="/shop" className="textLink">
+              View all products
+            </Link>
+          </div>
+
+          <div className="productGrid">
+            {featuredProducts.map((product) => (
+              <ProductCard
+                key={product.id}
+                product={product}
+                onClick={() => setSelectedProduct(product)}
+              />
+            ))}
+          </div>
+        </section>
+
+        <section className="homeGallerySection">
+          <div className="homeSectionHeader">
+            <div>
+              <span className="sectionEyebrow">Previous work</span>
+              <h2>A growing gallery of personalized pieces.</h2>
+            </div>
+
+            <Link to="/contact" className="textLink">
+              Ask a question
+            </Link>
+          </div>
+
+          <div className="homeGalleryGrid">
+            {galleryProducts.map((product) => (
+              <img src={product.image} alt={product.name} key={product.id} />
+            ))}
+          </div>
+        </section>
+
+        <section className="homeTrustBand">
+          <div>
+            <strong>Pickup only</strong>
+            <span>Local pickup arranged after your order is ready.</span>
+          </div>
+
+          <div>
+            <strong>4-5 business days</strong>
+            <span>Typical turnaround after purchase and order details.</span>
+          </div>
+
+          <div>
+            <strong>Personalized orders</strong>
+            <span>Each piece is made from the photos and notes you provide.</span>
+          </div>
+        </section>
+      </main>
+
+      {selectedProduct && (
+        <ProductModal
+          product={selectedProduct}
+          onClose={() => setSelectedProduct(null)}
+        />
+      )}
+    </>
   );
 }
