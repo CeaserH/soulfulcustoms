@@ -505,6 +505,49 @@ nav a:hover,
   z-index: 1;
 }
 
+.heroPromoRibbon {
+  position: absolute;
+  top: 76px;
+  left: 0;
+  right: 0;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 34px;
+  padding: 0 20px;
+  background: linear-gradient(90deg, #c73d79, #e34592, #c73d79);
+  color: #fff;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.75rem;
+  font-weight: 800;
+  line-height: 1;
+  box-shadow: 0 12px 34px rgba(199, 61, 121, 0.28);
+}
+
+.heroPromoRibbon span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  line-height: 1;
+  transform: translateY(4px);
+}
+
+.heroPromoRibbon strong {
+  color: #fff7fb;
+  font-size: 0.9rem;
+  letter-spacing: 0.1em;
+  line-height: 1;
+}
+
+.heroPromoRibbon:hover {
+  background: linear-gradient(90deg, #b9316f, #dc3f8b, #b9316f);
+}
+
 .luxHero h1 {
   max-width: 500px;
 
@@ -3149,6 +3192,24 @@ nav a:hover,
 
   .cartButton {
     padding: 10px 16px;
+  }
+
+  .heroPromoRibbon {
+    top: 138px;
+    height: 44px;
+    padding: 0 14px;
+    font-size: 0.66rem;
+    line-height: 1;
+  }
+
+  .heroPromoRibbon span {
+    flex-wrap: wrap;
+    gap: 4px 8px;
+    line-height: 1.25;
+  }
+
+  .heroPromoRibbon strong {
+    font-size: 0.78rem;
   }
 
   .luxHero {

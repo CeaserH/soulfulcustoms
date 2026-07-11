@@ -186,6 +186,13 @@ export default function Home() {
       <section className="luxHero">
         <div className="heroOverlay"></div>
 
+        <Link to="/shop" className="heroPromoRibbon">
+          <span>
+            Limited-time back to school presale: <strong>Save 17%</strong> when
+            you preorder the bundle
+          </span>
+        </Link>
+
         <div className="heroContent">
           <div className="heroCopy">
             <div className="heroTextCarousel" aria-live="polite">
