@@ -9,6 +9,10 @@ const glassLifestyle = new URL(
   "../assets/hero/lifestyle-glass-frame.png",
   import.meta.url,
 ).href;
+const lightUpFrameBedtimeLifestyle = new URL(
+  "../assets/hero/lifestyle-light-up-frame-bedtime.png",
+  import.meta.url,
+).href;
 const slateLifestyle = new URL(
   "../assets/hero/lifestyle-slate-gift.png",
   import.meta.url,
@@ -21,22 +25,23 @@ const backToSchoolLifestyle = new URL(
   "../assets/products/lifestyle-back-to-school-bundle-v4.png",
   import.meta.url,
 ).href;
-const idBadgesLifestyle = new URL(
-  "../assets/products/lifestyle-id-badge-holders-v2.png",
+const teacherBadgeLifestyle = new URL(
+  "../assets/hero/lifestyle-id-badge-teacher.png",
   import.meta.url,
 ).href;
-const buttonPinsLifestyle = new URL(
-  "../assets/products/lifestyle-button-pins.png",
+const denimPinsLifestyle = new URL(
+  "../assets/hero/lifestyle-button-pins-denim.png",
   import.meta.url,
 ).href;
-const potHoldersLifestyle = new URL(
-  "../assets/products/lifestyle-pot-holders.png",
+const kitchenPotHoldersLifestyle = new URL(
+  "../assets/hero/lifestyle-pot-holders-cooking.png",
   import.meta.url,
 ).href;
 
 const heroTags = [
   "Backpacks",
   "Glass Frames",
+  "Light-Up Frames",
   "Slate Frames",
   "Sports Tags",
   "ID Holders",
@@ -102,6 +107,15 @@ const heroScenes = [
       "Turn favorite photos into polished glass keepsakes made for shelves, desks, and everyday reminders.",
   },
   {
+    image: lightUpFrameBedtimeLifestyle,
+    title: "Light-Up Glass Frame",
+    label: "Light-up frames",
+    imagePosition: "68% center",
+    headline: "Keep Memories Close At Night",
+    copy:
+      "Add a soft glow to favorite family photos with a light-up glass frame made for bedside moments.",
+  },
+  {
     image: slateLifestyle,
     title: "Heart Rock Slate",
     label: "Slate frames",
@@ -126,28 +140,29 @@ const heroScenes = [
       "Match the backpack, lunch bag, and pencil pouch with a custom set made for the first day back.",
   },
   {
-    image: idBadgesLifestyle,
-    title: "ID/Badge Holders",
-    label: "Work-ready holders",
-    headline: "Make Badge Holders Personal",
+    image: denimPinsLifestyle,
+    title: "Jean Jacket Button Pins",
+    label: "Wearable keepsakes",
+    imagePosition: "center 18%",
+    headline: "Pin Memories Where They Show",
     copy:
-      "Choose a holder style for work IDs, teacher badges, event passes, and everyday credentials.",
+      "Add photo buttons to jackets, bags, and everyday outfits for a small custom detail with personality.",
   },
   {
-    image: buttonPinsLifestyle,
-    title: "Button Pins",
-    label: "Wearable details",
-    headline: "Wear Your Favorite Moments",
+    image: teacherBadgeLifestyle,
+    title: "Teacher ID/Badge Holder",
+    label: "Teacher styles",
+    headline: "Carry Your Style To Work",
     copy:
-      "Turn designs, photos, and little statements into button pins made for jackets, bags, and gifts.",
+      "Choose a teacher-inspired holder style and add the name or title that makes it yours.",
   },
   {
-    image: potHoldersLifestyle,
-    title: "Pot Holders",
-    label: "Home goods",
-    headline: "Bring Custom Into The Kitchen",
+    image: kitchenPotHoldersLifestyle,
+    title: "Custom Kitchen Pot Holders",
+    label: "Kitchen gifts",
+    headline: "Make The Kitchen Personal",
     copy:
-      "Add personal artwork to practical home pieces that feel warm, useful, and gift-ready.",
+      "Turn family photos and custom artwork into useful kitchen pieces made for everyday cooking.",
   },
 ];
 
@@ -207,9 +222,14 @@ export default function Home() {
           <div className="heroShowcase" aria-label="Product lifestyle scenes">
             {heroScenes.map((scene, index) => (
               <figure
-                className="heroScene"
+                className={`heroScene${
+                  scene.imagePosition ? " heroScenePositioned" : ""
+                }`}
                 key={scene.title}
-                style={{ "--scene-index": index }}
+                style={{
+                  "--scene-index": index,
+                  "--image-position": scene.imagePosition,
+                }}
               >
                 <img src={scene.image} alt={`${scene.title} lifestyle scene`} />
 

@@ -20,10 +20,13 @@ function formatItems(items = []) {
             .map((style) => style.label)
             .join(", ")}`
         : "";
+      const personalization = item.personalizationText
+        ? `\n   Personalization: ${item.personalizationText}`
+        : "";
 
       return `- ${item.name} x${item.quantity}${
         option ? `\n   Option: ${option}` : ""
-      }${styles}`;
+      }${personalization}${styles}`;
     })
     .join("\n");
 }
@@ -61,10 +64,13 @@ function buildCustomerHtml(order) {
             .map((style) => style.label)
             .join(", ")}</span>`
         : "";
+      const personalization = item.personalizationText
+        ? `<br><span style="color:#6e646b;">Personalization: ${item.personalizationText}</span>`
+        : "";
 
       return `<li style="margin-bottom:12px;"><strong>${item.name}</strong> x${
         item.quantity
-      }${option ? `<br><span style="color:#6e646b;">Option: ${option}</span>` : ""}${styles}</li>`;
+      }${option ? `<br><span style="color:#6e646b;">Option: ${option}</span>` : ""}${personalization}${styles}</li>`;
     })
     .join("");
 

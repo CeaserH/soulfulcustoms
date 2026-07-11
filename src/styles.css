@@ -482,7 +482,7 @@ nav a:hover,
 
   transform: translateY(10px);
 
-  animation: heroTextCycle 35s infinite;
+  animation: heroTextCycle 40s infinite;
 
   animation-delay: calc(var(--scene-index) * 5s);
 }
@@ -594,7 +594,7 @@ nav a:hover,
 
   opacity: 0;
 
-  animation: heroSceneCycle 35s infinite;
+  animation: heroSceneCycle 40s infinite;
 
   animation-delay: calc(var(--scene-index) * 5s);
 }
@@ -606,6 +606,10 @@ nav a:hover,
 
   object-fit: cover;
 
+}
+
+.heroScenePositioned img {
+  object-position: var(--image-position);
 }
 
 .heroScene figcaption {
@@ -648,11 +652,11 @@ nav a:hover,
 
 @keyframes heroSceneCycle {
   0%,
-  10% {
+  9% {
     opacity: 1;
   }
 
-  14%,
+  12%,
   96% {
     opacity: 0;
   }
@@ -664,12 +668,12 @@ nav a:hover,
 
 @keyframes heroTextCycle {
   0%,
-  10% {
+  9% {
     opacity: 1;
     transform: translateY(0);
   }
 
-  14%,
+  12%,
   96% {
     opacity: 0;
     transform: translateY(-8px);
@@ -1432,6 +1436,56 @@ nav a:hover,
   line-height: 1.6;
 }
 
+.productDetailList {
+  display: grid;
+
+  gap: 10px;
+}
+
+.productDetailList div {
+  padding: 12px 14px;
+
+  border-radius: 8px;
+
+  background: rgba(255, 255, 255, 0.04);
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.productDetailList span {
+  display: block;
+
+  margin-bottom: 4px;
+
+  color: var(--accent-hover);
+
+  font-size: 0.72rem;
+
+  font-weight: 800;
+
+  letter-spacing: var(--tracking-label);
+
+  text-transform: uppercase;
+}
+
+.productDetailList p {
+  margin: 0;
+}
+
+.productDetailList .isNote {
+  background: rgba(255, 193, 7, 0.08);
+
+  border-color: rgba(255, 193, 7, 0.22);
+}
+
+.optionHelpText {
+  color: var(--muted);
+
+  font-size: 0.84rem;
+
+  line-height: 1.45;
+}
+
 .optionGroup {
   display: flex;
 
@@ -1906,6 +1960,10 @@ nav a:hover,
   border: 1px solid rgba(255, 255, 255, 0.08);
 
   color: white;
+}
+
+.personalizationCard {
+  margin-top: 12px;
 }
 
 .photoQualityNotice {
@@ -3531,6 +3589,22 @@ nav a:hover,
 .optionGroup label,
 .modalPriceBlock span {
   color: var(--muted);
+}
+
+.productDetailList div {
+  background: rgba(255, 255, 255, 0.76);
+
+  border-color: rgba(30, 22, 28, 0.12);
+}
+
+.productDetailList p {
+  color: var(--text);
+}
+
+.productDetailList .isNote {
+  background: #fff4d8;
+
+  border-color: rgba(213, 151, 28, 0.35);
 }
 
 .optionGroup select,

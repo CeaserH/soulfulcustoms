@@ -10,6 +10,7 @@ export default function ProductModal({ product, onClose }) {
     product.optionLabel ||
     (product.category === "Tags" ? "Choose Tag Style" : "Choose Style");
   const quantityOptionLabel = product.quantityLabel || "Choose Quantity";
+  const personalization = product.personalization;
   const hasVisualStyleOptions = Boolean(
     product.options.visualStyles?.length && product.options.quantities?.length,
   );
@@ -31,6 +32,8 @@ export default function ProductModal({ product, onClose }) {
   );
 
   const [childName, setChildName] = useState("");
+
+  const [personalizationText, setPersonalizationText] = useState("");
 
   const [addedToCart, setAddedToCart] = useState(false);
 
@@ -108,6 +111,12 @@ export default function ProductModal({ product, onClose }) {
       return;
     }
 
+    if (personalization?.required && !personalizationText.trim()) {
+      alert(`Please enter ${personalization.label.toLowerCase()}.`);
+
+      return;
+    }
+
     addToCart({
       ...product,
 
@@ -118,6 +127,11 @@ export default function ProductModal({ product, onClose }) {
       quantity: 1,
 
       childName,
+
+      personalizationText: personalizationText.trim(),
+      personalizationEnabled: Boolean(
+        personalization?.required || personalizationText.trim(),
+      ),
     });
 
     setAddedToCart(true);
@@ -139,7 +153,21 @@ export default function ProductModal({ product, onClose }) {
         <div className="modalContent">
           <h2>{product.name}</h2>
 
-          <p>{product.description}</p>
+          {product.details?.length ? (
+            <div className="productDetailList">
+              {product.details.map((detail) => (
+                <div
+                  className={detail.label.toLowerCase() === "note" ? "isNote" : ""}
+                  key={`${detail.label}-${detail.value}`}
+                >
+                  <span>{detail.label}</span>
+                  <p>{detail.value}</p>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p>{product.description}</p>
+          )}
 
           {product.options.sizes && (
             <>
@@ -277,6 +305,26 @@ export default function ProductModal({ product, onClose }) {
                 placeholder="Enter child's name"
                 className="modalInput"
               />
+            </div>
+          )}
+
+          {personalization?.enabled && (
+            <div className="optionGroup">
+              <label>{personalization.label}</label>
+
+              <input
+                type="text"
+                value={personalizationText}
+                onChange={(e) => setPersonalizationText(e.target.value)}
+                placeholder={personalization.placeholder}
+                className="modalInput"
+              />
+
+              {personalization.helperText && (
+                <small className="optionHelpText">
+                  {personalization.helperText}
+                </small>
+              )}
             </div>
           )}
 

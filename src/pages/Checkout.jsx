@@ -106,6 +106,14 @@ export default function Checkout() {
         return false;
       }
 
+      if (item.personalization?.required && !item.personalizationText?.trim()) {
+        setCheckoutError(
+          `${item.name}: Please enter ${item.personalization.label.toLowerCase()}.`,
+        );
+
+        return false;
+      }
+
       const missingUpload =
         !skipsUploads(item) &&
         (item.uploads || []).some((upload) => !upload?.uploadedId);
@@ -154,6 +162,13 @@ export default function Checkout() {
       quantity: item.quantity,
 
       childName: item.childName || "",
+
+      personalizationText: item.personalizationText || "",
+      personalizationEnabled: Boolean(
+        item.personalization?.required ||
+          item.personalizationEnabled ||
+          item.personalizationText,
+      ),
 
       paragraph: item.paragraph || "",
 
@@ -290,6 +305,19 @@ export default function Checkout() {
     );
   };
 
+  const updateCartItem = (cartItemId, updates) => {
+    setCart(
+      cart.map((item) =>
+        item.cartItemId === cartItemId
+          ? {
+              ...item,
+              ...updates,
+            }
+          : item,
+      ),
+    );
+  };
+
   const updateQuantity = (id, optionLabel, value) => {
     const qty = Math.max(1, parseInt(value) || 1);
 
@@ -395,6 +423,13 @@ export default function Checkout() {
                   <p className="itemSize">Child: {item.childName}</p>
                 )}
 
+                {item.personalizationText && (
+                  <p className="itemSize">
+                    {item.personalization?.label || "Personalization"}:{" "}
+                    {item.personalizationText}
+                  </p>
+                )}
+
                 {item.selectedOption?.description && (
                   <p>{item.selectedOption.description}</p>
                 )}
@@ -443,6 +478,53 @@ export default function Checkout() {
                   </button>
                 </div>
 
+                {item.personalization?.enabled && (
+                  <div className="uploadCard personalizationCard">
+                    <label className="phraseCheckbox">
+                      <input
+                        type="checkbox"
+                        checked={
+                          item.personalization.required ||
+                          item.personalizationEnabled ||
+                          Boolean(item.personalizationText)
+                        }
+                        disabled={item.personalization.required}
+                        onChange={(e) => {
+                          updateCartItem(item.cartItemId, {
+                            personalizationEnabled: e.target.checked,
+                            personalizationText: e.target.checked
+                              ? item.personalizationText || ""
+                              : "",
+                          });
+                        }}
+                      />
+                      {item.personalization.required
+                        ? item.personalization.label
+                        : `${item.personalization.label} (included)`}
+                    </label>
+
+                    {(item.personalization.required ||
+                      item.personalizationEnabled ||
+                      item.personalizationText !== "") && (
+                      <input
+                        type="text"
+                        className="phraseInput"
+                        value={item.personalizationText || ""}
+                        placeholder={item.personalization.placeholder}
+                        onChange={(e) =>
+                          updateCartItem(item.cartItemId, {
+                            personalizationText: e.target.value,
+                          })
+                        }
+                      />
+                    )}
+
+                    {item.personalization.helperText && (
+                      <p>{item.personalization.helperText}</p>
+                    )}
+                  </div>
+                )}
+
                 {!skipsUploads(item) && (
                   <div className="uploadSection">
                     {(item.uploads || []).map((upload, index) => {
@@ -483,7 +565,8 @@ export default function Checkout() {
                         {upload.file && <p>✓ {upload.file}</p>}
 
                         {item.allowCustomPhrase !== false &&
-                          !item.freeCustomPhrase && (
+                          !item.freeCustomPhrase &&
+                          !item.personalization?.enabled && (
                             <>
                               <label className="phraseCheckbox">
                                 <input
@@ -559,38 +642,38 @@ export default function Checkout() {
                                 />
                               )}
 
-                              <textarea
-                                placeholder="Special instructions"
-                                value={upload.note || ""}
-                                onChange={(e) => {
-                                  setCart(
-                                    cart.map((i) => {
-                                      if (
-                                        i.cartItemId !== item.cartItemId ||
-                                        i.selectedOption?.label !==
-                                          item.selectedOption?.label
-                                      ) {
-                                        return i;
-                                      }
-
-                                      const uploads = [...i.uploads];
-
-                                      uploads[index] = {
-                                        ...uploads[index],
-
-                                        note: e.target.value,
-                                      };
-
-                                      return {
-                                        ...i,
-                                        uploads,
-                                      };
-                                    }),
-                                  );
-                                }}
-                              />
                             </>
                           )}
+                        <textarea
+                          placeholder="Special instructions"
+                          value={upload.note || ""}
+                          onChange={(e) => {
+                            setCart(
+                              cart.map((i) => {
+                                if (
+                                  i.cartItemId !== item.cartItemId ||
+                                  i.selectedOption?.label !==
+                                    item.selectedOption?.label
+                                ) {
+                                  return i;
+                                }
+
+                                const uploads = [...i.uploads];
+
+                                uploads[index] = {
+                                  ...uploads[index],
+
+                                  note: e.target.value,
+                                };
+
+                                return {
+                                  ...i,
+                                  uploads,
+                                };
+                              }),
+                            );
+                          }}
+                        />
                       </div>
                     );
                     })}

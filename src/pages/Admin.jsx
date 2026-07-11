@@ -286,6 +286,13 @@ export default function Admin() {
                         <p>{item.childName}</p>
                       </div>
                     )}
+
+                    {item.personalizationText && (
+                      <div>
+                        <label>Personalization</label>
+                        <p>{item.personalizationText}</p>
+                      </div>
+                    )}
                   </div>
 
                   {item.paragraph && (

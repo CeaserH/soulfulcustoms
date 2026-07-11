@@ -77,6 +77,10 @@ export function CartProvider({ children }) {
           return false;
         }
 
+        if ((item.personalizationText || "") !== (product.personalizationText || "")) {
+          return false;
+        }
+
         return true;
       });
 
@@ -84,7 +88,8 @@ export function CartProvider({ children }) {
         return prev.map((item) => {
           if (
             item.id !== product.id ||
-            item.selectedOption?.label !== product.selectedOption?.label
+            item.selectedOption?.label !== product.selectedOption?.label ||
+            (item.personalizationText || "") !== (product.personalizationText || "")
           ) {
             return item;
           }

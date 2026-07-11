@@ -1,16 +1,3 @@
-const canvas1 = new URL("../assets/products/canvas1.jpg", import.meta.url).href;
-
-const canvas2 = new URL("../assets/products/canvas2.jpg", import.meta.url).href;
-
-const canvas3 = new URL("../assets/products/canvas3.jpg", import.meta.url).href;
-
-const canvas6 = new URL("../assets/products/canvas6.jpg", import.meta.url).href;
-
-const canvas8 = new URL("../assets/products/canvas8.jpg", import.meta.url).href;
-
-const canvas10 = new URL("../assets/products/canvas10.jpg", import.meta.url)
-  .href;
-
 const canvas12 = new URL("../assets/products/canvas12.jpeg", import.meta.url)
   .href;
 
@@ -65,6 +52,11 @@ const rectangleGlassLifestyle = new URL(
 
 const lightUpGlassLifestyle = new URL(
   "../assets/products/lifestyle-light-up-glass-frame.png",
+  import.meta.url,
+).href;
+
+const roundGlassLifestyle = new URL(
+  "../assets/products/lifestyle-round-glass-frame.png",
   import.meta.url,
 ).href;
 
@@ -142,6 +134,22 @@ const idBadgeQuantities = [
   },
 ];
 
+const backToSchoolPersonalization = {
+  enabled: true,
+  label: "Add Name",
+  placeholder: "Enter name to print",
+  helperText: "Optional. Add a name at no additional cost.",
+  required: false,
+};
+
+const badgeHolderPersonalization = {
+  enabled: true,
+  label: "Name / Title",
+  placeholder: "Example: Ms. Smith",
+  helperText: "Required. Enter the name or title to print on the holder.",
+  required: true,
+};
+
 const products = [
   // BACK TO SCHOOL
 
@@ -153,11 +161,20 @@ const products = [
     description:
       "Limited time 7/11-7/18. Includes a backpack, pencil pouch, and lunch bag.",
 
+    details: [
+      { label: "Product", value: "Back To School Presale Bundle" },
+      { label: "Includes", value: "Backpack, pencil pouch, and lunch bag" },
+      { label: "Presale", value: "Limited time 7/11-7/18" },
+      { label: "Personalization", value: "Optional name included at no additional cost" },
+    ],
+
     image: backToSchoolLifestyle,
 
     basePrice: 65,
 
     category: "Back To School Presale",
+
+    personalization: backToSchoolPersonalization,
 
     options: {
       sizes: [
@@ -177,11 +194,19 @@ const products = [
 
     description: 'Custom backpack, 16" tall.',
 
+    details: [
+      { label: "Product", value: "Custom Backpack" },
+      { label: "Size", value: '16" tall' },
+      { label: "Personalization", value: "Optional name included at no additional cost" },
+    ],
+
     image: backpackLifestyle,
 
     basePrice: 45,
 
     category: "Back to School",
+
+    personalization: backToSchoolPersonalization,
 
     options: {
       sizes: [
@@ -201,11 +226,19 @@ const products = [
 
     description: "Custom pencil pouch for school supplies and everyday carry.",
 
+    details: [
+      { label: "Product", value: "Custom Pencil Pouch" },
+      { label: "Size", value: '4.72" x 8.27"' },
+      { label: "Personalization", value: "Optional name included at no additional cost" },
+    ],
+
     image: pencilPouchLifestyle,
 
     basePrice: 8,
 
     category: "Back to School",
+
+    personalization: backToSchoolPersonalization,
 
     options: {
       sizes: [
@@ -225,11 +258,19 @@ const products = [
 
     description: 'Custom lunch bag, 7.87" x 10.23" x 2.54".',
 
+    details: [
+      { label: "Product", value: "Custom Lunch Bag" },
+      { label: "Size", value: '7.87" x 10.23" x 2.54"' },
+      { label: "Personalization", value: "Optional name included at no additional cost" },
+    ],
+
     image: lunchBagLifestyle,
 
     basePrice: 25,
 
     category: "Back to School",
+
+    personalization: backToSchoolPersonalization,
 
     options: {
       sizes: [
@@ -252,6 +293,13 @@ const products = [
     description:
       'Custom ID/badge holders, 2.75" x 3.93". Choose from 12 styles and order 1 or 3. NOTE: Holder only, lanyard not included.',
 
+    details: [
+      { label: "Product", value: "Custom ID / Badge Holder" },
+      { label: "Size", value: '2.75" x 3.93"' },
+      { label: "Styles", value: "Choose from 12 styles and order 1 or 3" },
+      { label: "Note", value: "Holder only, lanyard not included." },
+    ],
+
     image: idBadgeHoldersLifestyle,
 
     basePrice: 12,
@@ -259,6 +307,8 @@ const products = [
     category: "ID/Badge Holders",
 
     skipUploads: true,
+
+    personalization: badgeHolderPersonalization,
 
     optionLabel: "Choose Holder Style",
 
@@ -277,6 +327,12 @@ const products = [
 
     description:
       'Custom button pins available in 2.5" and 3" sizes with single and 5-pack pricing.',
+
+    details: [
+      { label: "Product", value: "Custom Button Pins" },
+      { label: "Sizes", value: '2.5" and 3" buttons' },
+      { label: "Pricing", value: "Single pins and 5-pack options available" },
+    ],
 
     image: buttonPinsLifestyle,
 
@@ -323,6 +379,12 @@ const products = [
 
     description: 'Custom pot holders, 8.25" x 10". Sold as a set of 2.',
 
+    details: [
+      { label: "Product", value: "Custom Pot Holders" },
+      { label: "Size", value: '8.25" x 10"' },
+      { label: "Quantity", value: "Set of 2" },
+    ],
+
     image: potHoldersLifestyle,
 
     basePrice: 30,
@@ -348,6 +410,11 @@ const products = [
     name: "Rectangle Glass Frame",
 
     description: "Custom Rectangle Glass Frame",
+
+    details: [
+      { label: "Product", value: "Custom Rectangle Glass Frame" },
+      { label: "Sizes", value: 'Small 4.3" x 6.3", Medium 6" x 8", Large 7.87" x 11.2"' },
+    ],
 
     image: rectangleGlassLifestyle,
 
@@ -377,11 +444,48 @@ const products = [
   },
 
   {
+    id: 18,
+
+    name: "Round Glass Frame",
+
+    description: 'Custom Round Glass Frame, 9" x 9".',
+
+    details: [
+      { label: "Product", value: "Custom Round Glass Frame" },
+      { label: "Size", value: '9" x 9"' },
+      { label: "Personalization", value: "Optional custom phrase available for $1" },
+    ],
+
+    image: roundGlassLifestyle,
+
+    basePrice: 35,
+
+    category: "Glass",
+
+    allowCustomPhrase: true,
+
+    options: {
+      sizes: [
+        {
+          label: "Standard",
+          dimensions: '9" x 9"',
+          price: 35,
+        },
+      ],
+    },
+  },
+
+  {
     id: 2,
 
     name: "Light Up Glass Frame",
 
     description: "LED Light Up Glass Frame",
+
+    details: [
+      { label: "Product", value: "LED Light Up Glass Frame" },
+      { label: "Size", value: '8" x 10"' },
+    ],
 
     image: lightUpGlassLifestyle,
 
@@ -408,6 +512,11 @@ const products = [
     name: "Rectangle Rock Slate",
 
     description: "Custom Rectangle Rock Slate Frame",
+
+    details: [
+      { label: "Product", value: "Custom Rectangle Rock Slate Frame" },
+      { label: "Sizes", value: 'Medium 5.9" x 7.9", Large 8" x 10"' },
+    ],
 
     image: rectangleSlateLifestyle,
 
@@ -438,6 +547,11 @@ const products = [
 
     description: "Custom Heart Rock Slate Frame",
 
+    details: [
+      { label: "Product", value: "Custom Heart Rock Slate Frame" },
+      { label: "Sizes", value: 'Small 5.9" x 5.9", Medium 7.5" x 7.5"' },
+    ],
+
     image: heartSlateLifestyle,
 
     basePrice: 18,
@@ -467,6 +581,11 @@ const products = [
 
     description: "Custom Round Rock Slate Frame",
 
+    details: [
+      { label: "Product", value: "Custom Round Rock Slate Frame" },
+      { label: "Size", value: '5.9" x 5.9"' },
+    ],
+
     image: roundSlateLifestyle,
 
     basePrice: 18,
@@ -480,11 +599,6 @@ const products = [
           dimensions: '5.9" x 5.9"',
           price: 18,
         },
-        {
-          label: "Large",
-          dimensions: '9" x 9"',
-          price: 25,
-        },
       ],
     },
   },
@@ -497,6 +611,12 @@ const products = [
     name: "Sports / Luggage Tags",
 
     description: "Custom Sports Bag & Luggage Tags",
+
+    details: [
+      { label: "Product", value: "Custom Sports Bag & Luggage Tags" },
+      { label: "Options", value: "Single-sided or double-sided printing" },
+      { label: "Personalization", value: "Can include small text, name, sports number, and team mascot" },
+    ],
 
     image: sportsTagsLifestyle,
 
