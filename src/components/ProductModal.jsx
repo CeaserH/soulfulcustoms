@@ -11,6 +11,18 @@ export default function ProductModal({ product, onClose }) {
     (product.category === "Tags" ? "Choose Tag Style" : "Choose Style");
   const quantityOptionLabel = product.quantityLabel || "Choose Quantity";
   const personalization = product.personalization;
+  const hasMultipleSizeOptions = (product.options.sizes?.length || 0) > 1;
+  const hasMultipleStyleOptions = (product.options.styles?.length || 0) > 1;
+  const shouldHideDetailSize =
+    hasMultipleSizeOptions || hasMultipleStyleOptions;
+  const visibleDetails =
+    product.details?.filter((detail) => {
+      if (!shouldHideDetailSize) {
+        return true;
+      }
+
+      return !["size", "sizes"].includes(detail.label.toLowerCase());
+    }) || [];
   const hasVisualStyleOptions = Boolean(
     product.options.visualStyles?.length && product.options.quantities?.length,
   );
@@ -153,9 +165,9 @@ export default function ProductModal({ product, onClose }) {
         <div className="modalContent">
           <h2>{product.name}</h2>
 
-          {product.details?.length ? (
+          {visibleDetails.length ? (
             <div className="productDetailList">
-              {product.details.map((detail) => (
+              {visibleDetails.map((detail) => (
                 <div
                   className={detail.label.toLowerCase() === "note" ? "isNote" : ""}
                   key={`${detail.label}-${detail.value}`}
@@ -169,7 +181,7 @@ export default function ProductModal({ product, onClose }) {
             <p>{product.description}</p>
           )}
 
-          {product.options.sizes && (
+          {product.options.sizes?.length > 1 && (
             <>
               {product.options.sizes.length === 1 ? (
                 <div className="optionGroup">

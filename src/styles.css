@@ -537,6 +537,10 @@ nav a:hover,
   transform: translateY(4px);
 }
 
+.heroPromoRibbon .heroPromoMobileText {
+  display: none;
+}
+
 .heroPromoRibbon strong {
   color: #fff7fb;
   font-size: 0.9rem;
@@ -3797,4 +3801,259 @@ nav a:hover,
   border-color: rgba(30, 22, 28, 0.12);
 
   color: var(--text);
+}
+
+/* COMPACT HOME */
+
+.luxHeroCompact {
+  min-height: auto;
+  padding: 124px 30px 54px;
+}
+
+.luxHeroCompact .heroContent {
+  grid-template-columns: minmax(310px, 0.82fr) minmax(480px, 1.18fr);
+  gap: clamp(28px, 5vw, 64px);
+}
+
+.luxHeroCompact .heroCopy {
+  padding-top: 0;
+}
+
+.luxHeroCompact .heroTextCarousel {
+  min-height: 220px;
+}
+
+.luxHeroCompact h1 {
+  max-width: 460px;
+  font-size: clamp(2rem, 3.25vw, 3.15rem);
+  margin-bottom: 18px;
+}
+
+.luxHeroCompact p {
+  max-width: 430px;
+  margin-bottom: 24px;
+  line-height: 1.58;
+}
+
+.luxHeroCompact .heroButtons {
+  margin-bottom: 18px;
+}
+
+.luxHeroCompact .heroShowcase {
+  min-height: clamp(350px, 38vw, 500px);
+}
+
+.luxHeroCompact .heroBottomFade {
+  height: 72px;
+}
+
+.homeStorefrontCompact {
+  padding: 42px 56px 72px;
+}
+
+.homeStorefrontCompact .homeIntroBand {
+  padding: 18px 0 34px;
+  gap: 26px;
+}
+
+.homeStorefrontCompact .homeCategoryGrid {
+  padding: 24px 0 44px;
+  gap: 14px;
+}
+
+.homeStorefrontCompact .homeCategoryCard {
+  min-height: 168px;
+  padding: 18px;
+}
+
+.homeStorefrontCompact .homeCategoryCard h3 {
+  font-size: 1.15rem;
+}
+
+.homeStorefrontCompact .homeSplitSection {
+  padding: 44px 0;
+  gap: 30px;
+}
+
+.homeStorefrontCompact .processGrid {
+  gap: 8px;
+}
+
+.homeStorefrontCompact .processStep {
+  padding: 13px 0 13px 18px;
+}
+
+.homeStorefrontCompact .homeProductSection,
+.homeStorefrontCompact .homeGallerySection {
+  padding: 48px 0 0;
+}
+
+.homeStorefrontCompact .homeSectionHeader {
+  margin-bottom: 16px;
+}
+
+.homeStorefrontCompact .productGrid {
+  gap: 18px;
+}
+
+.homeStorefrontCompact .homeGalleryGrid {
+  gap: 8px;
+}
+
+.homeStorefrontCompact .homeTrustBand {
+  margin-top: 48px;
+  padding: 18px 0;
+}
+
+@media (max-width: 900px) {
+  .luxHeroCompact {
+    padding: 174px 20px 46px;
+  }
+
+  .luxHeroCompact .heroContent {
+    gap: 28px;
+  }
+
+  .luxHeroCompact .heroTextCarousel {
+    min-height: 210px;
+  }
+
+  .luxHeroCompact .heroShowcase {
+    min-height: 340px;
+  }
+
+  .homeStorefrontCompact {
+    padding: 40px 18px 64px;
+  }
+
+  .homeStorefrontCompact .homeIntroBand,
+  .homeStorefrontCompact .homeSplitSection {
+    gap: 18px;
+  }
+
+  .homeStorefrontCompact .homeCategoryGrid {
+    padding-bottom: 36px;
+  }
+}
+
+@media (max-width: 640px) {
+  .luxHeroCompact {
+    padding: 168px 16px 40px;
+  }
+
+  .luxHeroCompact .heroTextCarousel {
+    min-height: 250px;
+  }
+
+  .luxHeroCompact .heroButtons {
+    margin-bottom: 14px;
+  }
+
+  .luxHeroCompact .heroShowcase {
+    min-height: 300px;
+  }
+
+  .homeStorefrontCompact .homeCategoryCard {
+    min-height: 150px;
+  }
+}
+
+@media (max-width: 900px) {
+  .heroContent,
+  .luxHeroCompact .heroContent {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    grid-template-columns: none;
+    align-items: center;
+    gap: 28px;
+  }
+
+  .heroShowcase,
+  .luxHeroCompact .heroShowcase {
+    order: 1;
+    width: min(100%, 560px);
+    min-width: 0;
+    margin: 0 auto;
+  }
+
+  .heroCopy,
+  .luxHeroCompact .heroCopy {
+    order: 2;
+    width: min(100%, 560px);
+    align-items: center;
+    text-align: center;
+  }
+
+  .heroTextCarousel,
+  .luxHeroCompact .heroTextCarousel {
+    width: 100%;
+  }
+
+  .heroTextSlide {
+    inset: 0;
+  }
+
+  .heroTags {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 640px) {
+  .luxHero,
+  .luxHeroCompact {
+    align-items: stretch;
+    padding-top: 212px;
+  }
+
+  .heroContent,
+  .luxHeroCompact .heroContent {
+    gap: 22px;
+  }
+
+  .heroTextCarousel,
+  .luxHeroCompact .heroTextCarousel {
+    min-height: 210px;
+  }
+
+  .luxHero p,
+  .luxHeroCompact p {
+    margin-bottom: 0;
+  }
+
+  .heroButtons,
+  .luxHeroCompact .heroButtons {
+    margin-top: 2px;
+  }
+
+  .heroShowcase,
+  .luxHeroCompact .heroShowcase {
+    width: 100%;
+    min-height: 320px;
+  }
+
+  .heroScene figcaption {
+    left: 16px;
+    right: 16px;
+    bottom: 16px;
+  }
+
+  .heroPromoRibbon {
+    top: 164px;
+    height: 30px;
+    padding: 0 12px;
+    font-size: 0.76rem;
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  .heroPromoRibbon .heroPromoDesktopText {
+    display: none;
+  }
+
+  .heroPromoRibbon .heroPromoMobileText {
+    display: inline-flex;
+    transform: translateY(3px);
+  }
 }

@@ -166,7 +166,7 @@ const heroScenes = [
   },
 ];
 
-export default function Home() {
+export default function Home({ isCompact = false }) {
   const [selectedProduct, setSelectedProduct] = useState(null);
 
   const visibleProducts = products.filter(
@@ -183,14 +183,15 @@ export default function Home() {
 
   return (
     <>
-      <section className="luxHero">
+      <section className={`luxHero${isCompact ? " luxHeroCompact" : ""}`}>
         <div className="heroOverlay"></div>
 
         <Link to="/shop" className="heroPromoRibbon">
-          <span>
+          <span className="heroPromoDesktopText">
             Limited-time back to school presale: <strong>Save 17%</strong> when
             you preorder the bundle
           </span>
+          <span className="heroPromoMobileText">Preorder for 17% off!</span>
         </Link>
 
         <div className="heroContent">
@@ -252,7 +253,11 @@ export default function Home() {
         <div className="heroBottomFade"></div>
       </section>
 
-      <main className="homeStorefront">
+      <main
+        className={`homeStorefront${
+          isCompact ? " homeStorefrontCompact" : ""
+        }`}
+      >
         <section className="homeIntroBand">
           <div>
             <span className="sectionEyebrow">Start here</span>
