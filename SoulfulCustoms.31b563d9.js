@@ -35072,7 +35072,6 @@ const glassLifestyle = new URL(require("319ba8b88c936825")).href;
 const lightUpFrameBedtimeLifestyle = new URL(require("484fe0b8f2bb8953")).href;
 const slateLifestyle = new URL(require("e3d5a347bb6dfe1c")).href;
 const tagLifestyle = new URL(require("16b27c4ffce9037")).href;
-const backToSchoolLifestyle = new URL(require("3cf90caac5857c7a")).href;
 const teacherBadgeLifestyle = new URL(require("d7cd23e595d925c9")).href;
 const denimPinsLifestyle = new URL(require("afd1f02674accb8f")).href;
 const kitchenPotHoldersLifestyle = new URL(require("8fa1f3d53fbcb3c2")).href;
@@ -35092,14 +35091,9 @@ const hiddenSaleCategories = new Set([
 ]);
 const categoryHighlights = [
     {
-        title: "Limited-Time Presale",
-        category: "Back To School Presale",
-        copy: "Bundle the backpack, lunch bag, and pencil pouch for presale savings."
-    },
-    {
         title: "Back To School",
         category: "Back to School",
-        copy: "Personalized backpacks, lunch bags, pencil pouches, and presale bundles."
+        copy: "Personalized backpacks, lunch bags, pencil pouches, and school essentials."
     },
     {
         title: "Glass Frames",
@@ -35165,13 +35159,6 @@ const heroScenes = [
         copy: "Add custom photos, colors, and details to sports bags, backpacks, and luggage tags."
     },
     {
-        image: backToSchoolLifestyle,
-        title: "Back To School Bundle",
-        label: "Limited-time presale",
-        headline: "Bundle The School Year",
-        copy: "Match the backpack, lunch bag, and pencil pouch with a custom set made for the first day back."
-    },
-    {
         image: denimPinsLifestyle,
         title: "Jean Jacket Button Pins",
         label: "Wearable keepsakes",
@@ -35199,7 +35186,7 @@ function Home({ isCompact = false }) {
     const [selectedProduct, setSelectedProduct] = (0, _react.useState)(null);
     const visibleProducts = (0, _productsDefault.default).filter((product)=>!hiddenSaleCategories.has(product.category));
     const featuredProducts = [
-        11,
+        12,
         1,
         6
     ].map((id)=>visibleProducts.find((product)=>product.id === id)).filter(Boolean);
@@ -35220,43 +35207,7 @@ function Home({ isCompact = false }) {
                         className: "heroOverlay"
                     }, void 0, false, {
                         fileName: "src/pages/Home.jsx",
-                        lineNumber: 187,
-                        columnNumber: 9
-                    }, this),
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Link), {
-                        to: "/shop",
-                        className: "heroPromoRibbon",
-                        children: [
-                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
-                                className: "heroPromoDesktopText",
-                                children: [
-                                    "Limited-time back to school presale: ",
-                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("strong", {
-                                        children: "Save 17%"
-                                    }, void 0, false, {
-                                        fileName: "src/pages/Home.jsx",
-                                        lineNumber: 191,
-                                        columnNumber: 50
-                                    }, this),
-                                    " when you preorder the bundle"
-                                ]
-                            }, void 0, true, {
-                                fileName: "src/pages/Home.jsx",
-                                lineNumber: 190,
-                                columnNumber: 11
-                            }, this),
-                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
-                                className: "heroPromoMobileText",
-                                children: "Preorder for 17% off!"
-                            }, void 0, false, {
-                                fileName: "src/pages/Home.jsx",
-                                lineNumber: 194,
-                                columnNumber: 11
-                            }, this)
-                        ]
-                    }, void 0, true, {
-                        fileName: "src/pages/Home.jsx",
-                        lineNumber: 189,
+                        lineNumber: 170,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -35278,25 +35229,25 @@ function Home({ isCompact = false }) {
                                                         children: scene.headline
                                                     }, void 0, false, {
                                                         fileName: "src/pages/Home.jsx",
-                                                        lineNumber: 206,
+                                                        lineNumber: 181,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
                                                         children: scene.copy
                                                     }, void 0, false, {
                                                         fileName: "src/pages/Home.jsx",
-                                                        lineNumber: 208,
+                                                        lineNumber: 183,
                                                         columnNumber: 19
                                                     }, this)
                                                 ]
                                             }, scene.headline, true, {
                                                 fileName: "src/pages/Home.jsx",
-                                                lineNumber: 201,
+                                                lineNumber: 176,
                                                 columnNumber: 17
                                             }, this))
                                     }, void 0, false, {
                                         fileName: "src/pages/Home.jsx",
-                                        lineNumber: 199,
+                                        lineNumber: 174,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -35308,7 +35259,7 @@ function Home({ isCompact = false }) {
                                                 children: "Order Prints"
                                             }, void 0, false, {
                                                 fileName: "src/pages/Home.jsx",
-                                                lineNumber: 214,
+                                                lineNumber: 189,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Link), {
@@ -35317,13 +35268,13 @@ function Home({ isCompact = false }) {
                                                 children: "Our Story"
                                             }, void 0, false, {
                                                 fileName: "src/pages/Home.jsx",
-                                                lineNumber: 218,
+                                                lineNumber: 193,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "src/pages/Home.jsx",
-                                        lineNumber: 213,
+                                        lineNumber: 188,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -35333,18 +35284,18 @@ function Home({ isCompact = false }) {
                                                 children: tag
                                             }, tag, false, {
                                                 fileName: "src/pages/Home.jsx",
-                                                lineNumber: 225,
+                                                lineNumber: 200,
                                                 columnNumber: 17
                                             }, this))
                                     }, void 0, false, {
                                         fileName: "src/pages/Home.jsx",
-                                        lineNumber: 223,
+                                        lineNumber: 198,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "src/pages/Home.jsx",
-                                lineNumber: 198,
+                                lineNumber: 173,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -35362,7 +35313,7 @@ function Home({ isCompact = false }) {
                                                 alt: `${scene.title} lifestyle scene`
                                             }, void 0, false, {
                                                 fileName: "src/pages/Home.jsx",
-                                                lineNumber: 242,
+                                                lineNumber: 217,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("figcaption", {
@@ -35371,50 +35322,50 @@ function Home({ isCompact = false }) {
                                                         children: scene.label
                                                     }, void 0, false, {
                                                         fileName: "src/pages/Home.jsx",
-                                                        lineNumber: 245,
+                                                        lineNumber: 220,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("strong", {
                                                         children: scene.title
                                                     }, void 0, false, {
                                                         fileName: "src/pages/Home.jsx",
-                                                        lineNumber: 246,
+                                                        lineNumber: 221,
                                                         columnNumber: 19
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "src/pages/Home.jsx",
-                                                lineNumber: 244,
+                                                lineNumber: 219,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, scene.title, true, {
                                         fileName: "src/pages/Home.jsx",
-                                        lineNumber: 232,
+                                        lineNumber: 207,
                                         columnNumber: 15
                                     }, this))
                             }, void 0, false, {
                                 fileName: "src/pages/Home.jsx",
-                                lineNumber: 230,
+                                lineNumber: 205,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "src/pages/Home.jsx",
-                        lineNumber: 197,
+                        lineNumber: 172,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                         className: "heroBottomFade"
                     }, void 0, false, {
                         fileName: "src/pages/Home.jsx",
-                        lineNumber: 253,
+                        lineNumber: 228,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "src/pages/Home.jsx",
-                lineNumber: 186,
+                lineNumber: 169,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("main", {
@@ -35430,33 +35381,33 @@ function Home({ isCompact = false }) {
                                         children: "Start here"
                                     }, void 0, false, {
                                         fileName: "src/pages/Home.jsx",
-                                        lineNumber: 263,
+                                        lineNumber: 238,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h2", {
                                         children: "Custom pieces for the photos worth keeping close."
                                     }, void 0, false, {
                                         fileName: "src/pages/Home.jsx",
-                                        lineNumber: 264,
+                                        lineNumber: 239,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "src/pages/Home.jsx",
-                                lineNumber: 262,
+                                lineNumber: 237,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
                                 children: "Browse the core collection, add your details at checkout, and Soulful Customs will prepare your order for local pickup."
                             }, void 0, false, {
                                 fileName: "src/pages/Home.jsx",
-                                lineNumber: 267,
+                                lineNumber: 242,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "src/pages/Home.jsx",
-                        lineNumber: 261,
+                        lineNumber: 236,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("section", {
@@ -35475,33 +35426,33 @@ function Home({ isCompact = false }) {
                                         ]
                                     }, void 0, true, {
                                         fileName: "src/pages/Home.jsx",
-                                        lineNumber: 285,
+                                        lineNumber: 260,
                                         columnNumber: 17
                                     }, this),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h3", {
                                         children: category.title
                                     }, void 0, false, {
                                         fileName: "src/pages/Home.jsx",
-                                        lineNumber: 286,
+                                        lineNumber: 261,
                                         columnNumber: 17
                                     }, this),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
                                         children: category.copy
                                     }, void 0, false, {
                                         fileName: "src/pages/Home.jsx",
-                                        lineNumber: 287,
+                                        lineNumber: 262,
                                         columnNumber: 17
                                     }, this)
                                 ]
                             }, category.category, true, {
                                 fileName: "src/pages/Home.jsx",
-                                lineNumber: 280,
+                                lineNumber: 255,
                                 columnNumber: 15
                             }, this);
                         })
                     }, void 0, false, {
                         fileName: "src/pages/Home.jsx",
-                        lineNumber: 273,
+                        lineNumber: 248,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("section", {
@@ -35514,20 +35465,20 @@ function Home({ isCompact = false }) {
                                         children: "How it works"
                                     }, void 0, false, {
                                         fileName: "src/pages/Home.jsx",
-                                        lineNumber: 295,
+                                        lineNumber: 270,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h2", {
                                         children: "A simple path from favorite photo to finished keepsake."
                                     }, void 0, false, {
                                         fileName: "src/pages/Home.jsx",
-                                        lineNumber: 296,
+                                        lineNumber: 271,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "src/pages/Home.jsx",
-                                lineNumber: 294,
+                                lineNumber: 269,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -35539,38 +35490,38 @@ function Home({ isCompact = false }) {
                                                 children: item.step
                                             }, void 0, false, {
                                                 fileName: "src/pages/Home.jsx",
-                                                lineNumber: 302,
+                                                lineNumber: 277,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h3", {
                                                 children: item.title
                                             }, void 0, false, {
                                                 fileName: "src/pages/Home.jsx",
-                                                lineNumber: 303,
+                                                lineNumber: 278,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
                                                 children: item.copy
                                             }, void 0, false, {
                                                 fileName: "src/pages/Home.jsx",
-                                                lineNumber: 304,
+                                                lineNumber: 279,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, item.step, true, {
                                         fileName: "src/pages/Home.jsx",
-                                        lineNumber: 301,
+                                        lineNumber: 276,
                                         columnNumber: 15
                                     }, this))
                             }, void 0, false, {
                                 fileName: "src/pages/Home.jsx",
-                                lineNumber: 299,
+                                lineNumber: 274,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "src/pages/Home.jsx",
-                        lineNumber: 293,
+                        lineNumber: 268,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("section", {
@@ -35586,20 +35537,20 @@ function Home({ isCompact = false }) {
                                                 children: "Featured"
                                             }, void 0, false, {
                                                 fileName: "src/pages/Home.jsx",
-                                                lineNumber: 313,
+                                                lineNumber: 288,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h2", {
                                                 children: "Popular ways to customize."
                                             }, void 0, false, {
                                                 fileName: "src/pages/Home.jsx",
-                                                lineNumber: 314,
+                                                lineNumber: 289,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "src/pages/Home.jsx",
-                                        lineNumber: 312,
+                                        lineNumber: 287,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Link), {
@@ -35608,13 +35559,13 @@ function Home({ isCompact = false }) {
                                         children: "View all products"
                                     }, void 0, false, {
                                         fileName: "src/pages/Home.jsx",
-                                        lineNumber: 317,
+                                        lineNumber: 292,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "src/pages/Home.jsx",
-                                lineNumber: 311,
+                                lineNumber: 286,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -35624,18 +35575,18 @@ function Home({ isCompact = false }) {
                                         onClick: ()=>setSelectedProduct(product)
                                     }, product.id, false, {
                                         fileName: "src/pages/Home.jsx",
-                                        lineNumber: 324,
+                                        lineNumber: 299,
                                         columnNumber: 15
                                     }, this))
                             }, void 0, false, {
                                 fileName: "src/pages/Home.jsx",
-                                lineNumber: 322,
+                                lineNumber: 297,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "src/pages/Home.jsx",
-                        lineNumber: 310,
+                        lineNumber: 285,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("section", {
@@ -35651,20 +35602,20 @@ function Home({ isCompact = false }) {
                                                 children: "Previous work"
                                             }, void 0, false, {
                                                 fileName: "src/pages/Home.jsx",
-                                                lineNumber: 336,
+                                                lineNumber: 311,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h2", {
                                                 children: "A growing gallery of personalized pieces."
                                             }, void 0, false, {
                                                 fileName: "src/pages/Home.jsx",
-                                                lineNumber: 337,
+                                                lineNumber: 312,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "src/pages/Home.jsx",
-                                        lineNumber: 335,
+                                        lineNumber: 310,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Link), {
@@ -35673,13 +35624,13 @@ function Home({ isCompact = false }) {
                                         children: "Ask a question"
                                     }, void 0, false, {
                                         fileName: "src/pages/Home.jsx",
-                                        lineNumber: 340,
+                                        lineNumber: 315,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "src/pages/Home.jsx",
-                                lineNumber: 334,
+                                lineNumber: 309,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -35689,18 +35640,18 @@ function Home({ isCompact = false }) {
                                         alt: product.name
                                     }, product.id, false, {
                                         fileName: "src/pages/Home.jsx",
-                                        lineNumber: 347,
+                                        lineNumber: 322,
                                         columnNumber: 15
                                     }, this))
                             }, void 0, false, {
                                 fileName: "src/pages/Home.jsx",
-                                lineNumber: 345,
+                                lineNumber: 320,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "src/pages/Home.jsx",
-                        lineNumber: 333,
+                        lineNumber: 308,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("section", {
@@ -35712,20 +35663,20 @@ function Home({ isCompact = false }) {
                                         children: "Pickup only"
                                     }, void 0, false, {
                                         fileName: "src/pages/Home.jsx",
-                                        lineNumber: 354,
+                                        lineNumber: 329,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
                                         children: "Local pickup arranged after your order is ready."
                                     }, void 0, false, {
                                         fileName: "src/pages/Home.jsx",
-                                        lineNumber: 355,
+                                        lineNumber: 330,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "src/pages/Home.jsx",
-                                lineNumber: 353,
+                                lineNumber: 328,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -35734,20 +35685,20 @@ function Home({ isCompact = false }) {
                                         children: "4-5 business days"
                                     }, void 0, false, {
                                         fileName: "src/pages/Home.jsx",
-                                        lineNumber: 359,
+                                        lineNumber: 334,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
                                         children: "Typical turnaround after purchase and order details."
                                     }, void 0, false, {
                                         fileName: "src/pages/Home.jsx",
-                                        lineNumber: 360,
+                                        lineNumber: 335,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "src/pages/Home.jsx",
-                                lineNumber: 358,
+                                lineNumber: 333,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -35756,32 +35707,32 @@ function Home({ isCompact = false }) {
                                         children: "Personalized orders"
                                     }, void 0, false, {
                                         fileName: "src/pages/Home.jsx",
-                                        lineNumber: 364,
+                                        lineNumber: 339,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
                                         children: "Each piece is made from the photos and notes you provide."
                                     }, void 0, false, {
                                         fileName: "src/pages/Home.jsx",
-                                        lineNumber: 365,
+                                        lineNumber: 340,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "src/pages/Home.jsx",
-                                lineNumber: 363,
+                                lineNumber: 338,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "src/pages/Home.jsx",
-                        lineNumber: 352,
+                        lineNumber: 327,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "src/pages/Home.jsx",
-                lineNumber: 256,
+                lineNumber: 231,
                 columnNumber: 7
             }, this),
             selectedProduct && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _productModalDefault.default), {
@@ -35789,7 +35740,7 @@ function Home({ isCompact = false }) {
                 onClose: ()=>setSelectedProduct(null)
             }, void 0, false, {
                 fileName: "src/pages/Home.jsx",
-                lineNumber: 371,
+                lineNumber: 346,
                 columnNumber: 9
             }, this)
         ]
@@ -35805,7 +35756,7 @@ $RefreshReg$(_c, "Home");
   globalThis.$RefreshReg$ = prevRefreshReg;
   globalThis.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"dVPUn","react":"jMk1U","react-router-dom":"61z4w","../components/ProductCard":"a7k8E","../components/ProductModal":"Q8jYS","../data/products":"1AEWj","319ba8b88c936825":"22kPE","484fe0b8f2bb8953":"4wq0x","e3d5a347bb6dfe1c":"aloCz","16b27c4ffce9037":"eJbWe","3cf90caac5857c7a":"iijgZ","d7cd23e595d925c9":"hJEwj","afd1f02674accb8f":"dKrgh","8fa1f3d53fbcb3c2":"7uhO8","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi"}],"a7k8E":[function(require,module,exports,__globalThis) {
+},{"react/jsx-dev-runtime":"dVPUn","react":"jMk1U","react-router-dom":"61z4w","../components/ProductCard":"a7k8E","../components/ProductModal":"Q8jYS","../data/products":"1AEWj","319ba8b88c936825":"22kPE","484fe0b8f2bb8953":"4wq0x","e3d5a347bb6dfe1c":"aloCz","16b27c4ffce9037":"eJbWe","d7cd23e595d925c9":"hJEwj","afd1f02674accb8f":"dKrgh","8fa1f3d53fbcb3c2":"7uhO8","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi"}],"a7k8E":[function(require,module,exports,__globalThis) {
 var $parcel$ReactRefreshHelpers$b8b5 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 $parcel$ReactRefreshHelpers$b8b5.init();
 var prevRefreshReg = globalThis.$RefreshReg$;
@@ -36538,7 +36489,6 @@ const canvas12 = new URL(require("2d31b24e985f5a02")).href;
 const canvas13 = new URL(require("a44bdf5de80c05bb")).href;
 const canvas14 = new URL(require("a2c04c96efc7619c")).href;
 const canvas15 = new URL(require("2ba2a356af3b792")).href;
-const backToSchoolLifestyle = new URL(require("edb465f351c8f385")).href;
 const backpackLifestyle = new URL(require("6da25bc6a7ef41fb")).href;
 const pencilPouchLifestyle = new URL(require("f2b57c6ff458d314")).href;
 const lunchBagLifestyle = new URL(require("d6aeec95b64184dc")).href;
@@ -36606,42 +36556,6 @@ const badgeHolderPersonalization = {
 };
 const products = [
     // BACK TO SCHOOL
-    {
-        id: 11,
-        name: "Back To School Presale Bundle",
-        description: "Limited time 7/11-7/18. Includes a backpack, pencil pouch, and lunch bag.",
-        details: [
-            {
-                label: "Product",
-                value: "Back To School Presale Bundle"
-            },
-            {
-                label: "Includes",
-                value: "Backpack, pencil pouch, and lunch bag"
-            },
-            {
-                label: "Presale",
-                value: "Limited time 7/11-7/18"
-            },
-            {
-                label: "Personalization",
-                value: "Optional name included at no additional cost"
-            }
-        ],
-        image: backToSchoolLifestyle,
-        basePrice: 65,
-        category: "Back To School Presale",
-        personalization: backToSchoolPersonalization,
-        options: {
-            sizes: [
-                {
-                    label: "Bundle",
-                    dimensions: "Backpack, pencil pouch, and lunch bag",
-                    price: 65
-                }
-            ]
-        }
-    },
     {
         id: 12,
         name: "Backpack",
@@ -37189,7 +37103,7 @@ const products = [
 ];
 exports.default = products;
 
-},{"2d31b24e985f5a02":"iQtwb","a44bdf5de80c05bb":"7RCKY","a2c04c96efc7619c":"ktjri","2ba2a356af3b792":"h7BUH","edb465f351c8f385":"iijgZ","6da25bc6a7ef41fb":"fHxoJ","f2b57c6ff458d314":"8xaUZ","d6aeec95b64184dc":"dj4PX","176b042f1cfd7b88":"3QXNn","19137fbd002a0d3b":"5I4W2","3fb99fabbdfb0afe":"6Mbtj","16e54765a1678ee6":"3cTdj","5943f39fc0eaf7a0":"94AoN","60e7501e2ff6630d":"9zy0f","7a5ccdb10a7b0040":"aZsVp","e6643db15d2b054e":"4ODWn","6cec4e94aaf436c9":"jD4as","eff8a0c6deab78ec":"bDL01","b3562c0d1751f3c1":"anIFY","e244d306f373b273":"4Xcll","68d92a38cfc0dc8b":"8XnRF","e28d00a4d8d033c9":"k7b9b","ad18f97251b57f37":"hDYNV","10cae2350fb1732e":"2rPUH","22a5be710eb88f6b":"1YRwG","ac3d6e857e5157f0":"jX9ww","6ab8707fe935939c":"jbAWX","b2801c0495bbdbe3":"1Xxdo","b8b3b2cb3400514b":"d7ffb","58db2b6255ea847":"cyI6k","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"iQtwb":[function(require,module,exports,__globalThis) {
+},{"2d31b24e985f5a02":"iQtwb","a44bdf5de80c05bb":"7RCKY","a2c04c96efc7619c":"ktjri","2ba2a356af3b792":"h7BUH","6da25bc6a7ef41fb":"fHxoJ","f2b57c6ff458d314":"8xaUZ","d6aeec95b64184dc":"dj4PX","176b042f1cfd7b88":"3QXNn","19137fbd002a0d3b":"5I4W2","3fb99fabbdfb0afe":"6Mbtj","16e54765a1678ee6":"3cTdj","5943f39fc0eaf7a0":"94AoN","60e7501e2ff6630d":"9zy0f","7a5ccdb10a7b0040":"aZsVp","e6643db15d2b054e":"4ODWn","6cec4e94aaf436c9":"jD4as","eff8a0c6deab78ec":"bDL01","b3562c0d1751f3c1":"anIFY","e244d306f373b273":"4Xcll","68d92a38cfc0dc8b":"8XnRF","e28d00a4d8d033c9":"k7b9b","ad18f97251b57f37":"hDYNV","10cae2350fb1732e":"2rPUH","22a5be710eb88f6b":"1YRwG","ac3d6e857e5157f0":"jX9ww","6ab8707fe935939c":"jbAWX","b2801c0495bbdbe3":"1Xxdo","b8b3b2cb3400514b":"d7ffb","58db2b6255ea847":"cyI6k","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"iQtwb":[function(require,module,exports,__globalThis) {
 module.exports = module.bundle.resolve("canvas12.b077f542.jpeg") + "?" + Date.now();
 
 },{}],"7RCKY":[function(require,module,exports,__globalThis) {
@@ -37200,9 +37114,6 @@ module.exports = module.bundle.resolve("canvas14.75793894.jpeg") + "?" + Date.no
 
 },{}],"h7BUH":[function(require,module,exports,__globalThis) {
 module.exports = module.bundle.resolve("canvas15.cff5879b.jpeg") + "?" + Date.now();
-
-},{}],"iijgZ":[function(require,module,exports,__globalThis) {
-module.exports = module.bundle.resolve("lifestyle-back-to-school-bundle-v4.71f7e1ba.png") + "?" + Date.now();
 
 },{}],"fHxoJ":[function(require,module,exports,__globalThis) {
 module.exports = module.bundle.resolve("lifestyle-backpack.dff70ac4.png") + "?" + Date.now();

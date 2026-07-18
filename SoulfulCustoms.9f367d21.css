@@ -326,53 +326,6 @@ nav a {
   inset: 0;
 }
 
-.heroPromoRibbon {
-  z-index: 4;
-  color: #fff;
-  text-align: center;
-  text-transform: uppercase;
-  letter-spacing: .08em;
-  background: linear-gradient(90deg, #c73d79, #e34592, #c73d79);
-  justify-content: center;
-  align-items: center;
-  height: 34px;
-  padding: 0 20px;
-  font-size: .75rem;
-  font-weight: 800;
-  line-height: 1;
-  text-decoration: none;
-  display: flex;
-  position: absolute;
-  top: 76px;
-  left: 0;
-  right: 0;
-  box-shadow: 0 12px 34px #c73d7947;
-}
-
-.heroPromoRibbon span {
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  line-height: 1;
-  display: inline-flex;
-  transform: translateY(4px);
-}
-
-.heroPromoRibbon .heroPromoMobileText {
-  display: none;
-}
-
-.heroPromoRibbon strong {
-  color: #fff7fb;
-  letter-spacing: .1em;
-  font-size: .9rem;
-  line-height: 1;
-}
-
-.heroPromoRibbon:hover {
-  background: linear-gradient(90deg, #b9316f, #dc3f8b, #b9316f);
-}
-
 .luxHero h1 {
   max-width: 500px;
   letter-spacing: var(--tracking-tight);
@@ -2146,24 +2099,6 @@ nav a {
     padding: 10px 16px;
   }
 
-  .heroPromoRibbon {
-    height: 44px;
-    padding: 0 14px;
-    font-size: .66rem;
-    line-height: 1;
-    top: 138px;
-  }
-
-  .heroPromoRibbon span {
-    flex-wrap: wrap;
-    gap: 4px 8px;
-    line-height: 1.25;
-  }
-
-  .heroPromoRibbon strong {
-    font-size: .78rem;
-  }
-
   .luxHero {
     min-height: auto;
     padding: 190px 20px 80px;
@@ -2818,7 +2753,6 @@ nav a:hover, .activeNav {
 @media (width <= 640px) {
   .luxHero, .luxHeroCompact {
     align-items: stretch;
-    padding-top: 212px;
   }
 
   .heroContent, .luxHeroCompact .heroContent {
@@ -2846,25 +2780,6 @@ nav a:hover, .activeNav {
     bottom: 16px;
     left: 16px;
     right: 16px;
-  }
-
-  .heroPromoRibbon {
-    letter-spacing: .06em;
-    white-space: nowrap;
-    height: 30px;
-    padding: 0 12px;
-    font-size: .76rem;
-    top: 164px;
-    overflow: hidden;
-  }
-
-  .heroPromoRibbon .heroPromoDesktopText {
-    display: none;
-  }
-
-  .heroPromoRibbon .heroPromoMobileText {
-    display: inline-flex;
-    transform: translateY(3px);
   }
 }
 /*# sourceMappingURL=SoulfulCustoms.9f367d21.css.map */
