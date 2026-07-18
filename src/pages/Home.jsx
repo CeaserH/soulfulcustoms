@@ -21,10 +21,6 @@ const tagLifestyle = new URL(
   "../assets/hero/lifestyle-sports-tag.png",
   import.meta.url,
 ).href;
-const backToSchoolLifestyle = new URL(
-  "../assets/products/lifestyle-back-to-school-bundle-v4.png",
-  import.meta.url,
-).href;
 const teacherBadgeLifestyle = new URL(
   "../assets/hero/lifestyle-id-badge-teacher.png",
   import.meta.url,
@@ -53,14 +49,9 @@ const hiddenSaleCategories = new Set(["Father's Day", "Graduation"]);
 
 const categoryHighlights = [
   {
-    title: "Limited-Time Presale",
-    category: "Back To School Presale",
-    copy: "Bundle the backpack, lunch bag, and pencil pouch for presale savings.",
-  },
-  {
     title: "Back To School",
     category: "Back to School",
-    copy: "Personalized backpacks, lunch bags, pencil pouches, and presale bundles.",
+    copy: "Personalized backpacks, lunch bags, pencil pouches, and school essentials.",
   },
   {
     title: "Glass Frames",
@@ -132,14 +123,6 @@ const heroScenes = [
       "Add custom photos, colors, and details to sports bags, backpacks, and luggage tags.",
   },
   {
-    image: backToSchoolLifestyle,
-    title: "Back To School Bundle",
-    label: "Limited-time presale",
-    headline: "Bundle The School Year",
-    copy:
-      "Match the backpack, lunch bag, and pencil pouch with a custom set made for the first day back.",
-  },
-  {
     image: denimPinsLifestyle,
     title: "Jean Jacket Button Pins",
     label: "Wearable keepsakes",
@@ -173,7 +156,7 @@ export default function Home({ isCompact = false }) {
     (product) => !hiddenSaleCategories.has(product.category),
   );
 
-  const featuredProducts = [11, 1, 6]
+  const featuredProducts = [12, 1, 6]
     .map((id) => visibleProducts.find((product) => product.id === id))
     .filter(Boolean);
 
@@ -185,14 +168,6 @@ export default function Home({ isCompact = false }) {
     <>
       <section className={`luxHero${isCompact ? " luxHeroCompact" : ""}`}>
         <div className="heroOverlay"></div>
-
-        <Link to="/shop" className="heroPromoRibbon">
-          <span className="heroPromoDesktopText">
-            Limited-time back to school presale: <strong>Save 17%</strong> when
-            you preorder the bundle
-          </span>
-          <span className="heroPromoMobileText">Preorder for 17% off!</span>
-        </Link>
 
         <div className="heroContent">
           <div className="heroCopy">

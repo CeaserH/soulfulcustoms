@@ -10,11 +10,6 @@ const canvas14 = new URL("../assets/products/canvas14.jpeg", import.meta.url)
 const canvas15 = new URL("../assets/products/canvas15.jpeg", import.meta.url)
   .href;
 
-const backToSchoolLifestyle = new URL(
-  "../assets/products/lifestyle-back-to-school-bundle-v4.png",
-  import.meta.url,
-).href;
-
 const backpackLifestyle = new URL(
   "../assets/products/lifestyle-backpack.png",
   import.meta.url,
@@ -152,40 +147,6 @@ const badgeHolderPersonalization = {
 
 const products = [
   // BACK TO SCHOOL
-
-  {
-    id: 11,
-
-    name: "Back To School Presale Bundle",
-
-    description:
-      "Limited time 7/11-7/18. Includes a backpack, pencil pouch, and lunch bag.",
-
-    details: [
-      { label: "Product", value: "Back To School Presale Bundle" },
-      { label: "Includes", value: "Backpack, pencil pouch, and lunch bag" },
-      { label: "Presale", value: "Limited time 7/11-7/18" },
-      { label: "Personalization", value: "Optional name included at no additional cost" },
-    ],
-
-    image: backToSchoolLifestyle,
-
-    basePrice: 65,
-
-    category: "Back To School Presale",
-
-    personalization: backToSchoolPersonalization,
-
-    options: {
-      sizes: [
-        {
-          label: "Bundle",
-          dimensions: "Backpack, pencil pouch, and lunch bag",
-          price: 65,
-        },
-      ],
-    },
-  },
 
   {
     id: 12,
