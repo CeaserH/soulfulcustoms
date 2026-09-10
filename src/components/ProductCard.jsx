@@ -1,10 +1,12 @@
+import { isOutOfStock } from "../utils/stock";
+
 export default function ProductCard({ product, onClick }) {
   const options =
-    product.options.sizes ||
-    product.options.styles ||
-    product.options.quantities ||
+    product.options?.sizes ||
+    product.options?.styles ||
+    product.options?.quantities ||
     [];
-  const optionCount = product.options.visualStyles
+  const optionCount = product.options?.visualStyles
     ? product.options.visualStyles.length
     : options.length;
   const prices = options.map((option) => option.price);
@@ -24,7 +26,7 @@ export default function ProductCard({ product, onClick }) {
       <div className="productInfo">
         <div>
           <div className="productMeta">
-            <span>{product.category}</span>
+            <span>{product.displayCategory || product.category}</span>
             <span>
               {optionCount} {optionCount === 1 ? "option" : "options"}
             </span>
@@ -37,7 +39,9 @@ export default function ProductCard({ product, onClick }) {
 
         <div className="productFooter">
           <span className="productPrice">{priceLabel}</span>
-          <span className="productAction">View</span>
+          <span className="productAction">
+            {isOutOfStock(product) ? "Temporarily Out Of Stock" : "View"}
+          </span>
         </div>
       </div>
     </button>

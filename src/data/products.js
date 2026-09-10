@@ -636,6 +636,8 @@ const products = [
 
     category: "Graduation",
 
+    isActive: false,
+
     requiredUploads: 1,
 
     requiresChildName: true,
@@ -687,6 +689,8 @@ const products = [
 
     category: "Graduation",
 
+    isActive: false,
+
     requiredUploads: 3,
 
     isCustomProject: true,
@@ -725,6 +729,8 @@ const products = [
 
     category: "Graduation",
 
+    isActive: false,
+
     requiredUploads: 4,
 
     freeCustomPhrase: true,
@@ -755,6 +761,8 @@ const products = [
     basePrice: 18,
 
     category: "Father's Day",
+
+    isActive: false,
 
     requiredUploads: 5,
 

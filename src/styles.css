@@ -221,6 +221,39 @@ nav a:hover,
   transition: all 0.25s ease;
 }
 
+.navRight {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.adminPortalLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 16px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.adminPortalLink:hover,
+.adminPortalLink.isActive {
+  background: rgba(212, 76, 127, 0.12);
+  border-color: rgba(212, 76, 127, 0.28);
+  color: var(--accent-hover);
+}
+
 .cartCount {
   display: flex;
 
@@ -264,15 +297,17 @@ nav a:hover,
 
   gap: 12px;
 
-  padding: 16px 20px;
+  width: min(330px, calc(100% - 40px));
 
-  border-radius: 18px;
+  padding: 16px 18px;
 
-  background: rgba(10, 10, 10, 0.95);
+  border-radius: 12px;
 
-  border: 1px solid rgba(43, 190, 178, 0.35);
+  background: rgba(255, 253, 249, 0.96);
 
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(214, 70, 134, 0.22);
+
+  box-shadow: 0 18px 48px rgba(51, 35, 43, 0.18);
 
   z-index: 9999;
 
@@ -292,11 +327,16 @@ nav a:hover,
 
   justify-content: center;
 
-  background: var(--accent-hover);
+  background: linear-gradient(135deg, var(--accent), var(--accent-dark));
 
   color: white;
 
   font-weight: 700;
+}
+
+.cartToast strong {
+  color: var(--text);
+  font-size: 0.95rem;
 }
 
 .cartToast p {
@@ -304,7 +344,9 @@ nav a:hover,
 
   font-size: 0.9rem;
 
-  opacity: 0.8;
+  color: var(--muted);
+
+  line-height: 1.45;
 }
 
 @keyframes toastIn {
@@ -3151,6 +3193,17 @@ nav a:hover,
     padding: 10px 16px;
   }
 
+  .navRight {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .adminPortalLink {
+    min-height: 42px;
+    padding: 0 14px;
+    font-size: 0.68rem;
+  }
+
   .luxHero {
     min-height: auto;
 
@@ -3433,7 +3486,8 @@ body {
 .navBrand,
 nav a,
 .secondaryBtn,
-.cartButton {
+.cartButton,
+.adminPortalLink {
   color: var(--text);
 }
 
@@ -3451,6 +3505,12 @@ nav a:hover,
 .cartButton {
   background: rgba(255, 255, 255, 0.72);
   border-color: rgba(30, 22, 28, 0.12);
+}
+
+.adminPortalLink {
+  background: rgba(255, 255, 255, 0.72);
+  border-color: rgba(30, 22, 28, 0.12);
+  color: var(--text);
 }
 
 .cartCountEmpty {
@@ -3736,6 +3796,389 @@ nav a:hover,
   border-color: rgba(30, 22, 28, 0.12);
 
   color: var(--text);
+}
+
+.adminTabs {
+  display: flex;
+  gap: 8px;
+  padding: 6px;
+  border: 1px solid rgba(30, 22, 28, 0.12);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.adminTabs button,
+.adminGhostBtn {
+  border: 0;
+  cursor: pointer;
+  color: var(--text);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.adminTabs button {
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: transparent;
+  font-size: 0.72rem;
+}
+
+.adminTabs button.isActive {
+  background: var(--accent);
+  color: white;
+  box-shadow: 0 10px 24px rgba(214, 70, 134, 0.22);
+}
+
+.adminProductManager {
+  display: grid;
+  grid-template-columns: 380px minmax(0, 1fr);
+  gap: 2rem;
+}
+
+.adminProductSidebar {
+  height: fit-content;
+  max-height: calc(100svh - 170px);
+  overflow: auto;
+}
+
+.adminProductSidebarHeader,
+.adminProductFormHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.adminGhostBtn {
+  flex: 0 0 auto;
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: rgba(214, 70, 134, 0.1);
+  color: var(--accent);
+  font-size: 0.72rem;
+}
+
+.adminProductActions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.adminDangerBtn {
+  background: rgba(181, 61, 75, 0.1);
+  color: #b53d4b;
+}
+
+.adminDangerBtn:hover {
+  background: rgba(181, 61, 75, 0.16);
+}
+
+.adminProductListItem {
+  grid-template-columns: 54px minmax(0, 1fr) auto;
+  align-items: center;
+}
+
+.adminProductListItem img {
+  width: 54px;
+  height: 54px;
+  border-radius: 8px;
+  object-fit: cover;
+  border: 1px solid rgba(30, 22, 28, 0.12);
+}
+
+.adminMutedText {
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.adminProductForm {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.adminProductForm fieldset {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  min-width: 0;
+  border: 0;
+}
+
+.adminProductForm fieldset:disabled {
+  opacity: 0.58;
+}
+
+.adminFormGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.adminFullField {
+  grid-column: 1 / -1;
+}
+
+.adminProductForm label,
+.adminProductToggles label,
+.adminSizeRow label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  color: var(--accent);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+}
+
+.adminProductForm input,
+.adminProductForm select,
+.adminProductForm textarea {
+  width: 100%;
+  padding: 13px 14px;
+  border: 1px solid rgba(30, 22, 28, 0.14);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--text);
+  font: inherit;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.adminProductForm textarea {
+  min-height: 110px;
+  resize: vertical;
+}
+
+.adminProductForm input:focus,
+.adminProductForm select:focus,
+.adminProductForm textarea:focus {
+  outline: none;
+  border-color: rgba(214, 70, 134, 0.55);
+  box-shadow: 0 0 0 4px rgba(214, 70, 134, 0.1);
+}
+
+.adminImagePreview {
+  align-self: end;
+  padding: 8px;
+  border: 1px solid rgba(30, 22, 28, 0.12);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.adminImagePreview img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.adminProductOptions {
+  display: grid;
+  gap: 14px;
+  padding: 18px;
+  border: 1px solid rgba(30, 22, 28, 0.12);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.adminSizeRow {
+  display: grid;
+  grid-template-columns: minmax(110px, 0.9fr) minmax(180px, 1.4fr) minmax(100px, 0.7fr) auto;
+  gap: 12px;
+  align-items: end;
+}
+
+.adminSizeRow .removeBtn {
+  height: 45px;
+}
+
+.adminProductToggles {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.adminProductToggles .phraseCheckbox {
+  flex-direction: row;
+  align-items: center;
+  min-height: 45px;
+  padding: 12px 14px;
+  border: 1px solid rgba(30, 22, 28, 0.12);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.62);
+  color: var(--text);
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.adminProductToggles .phraseCheckbox input {
+  width: auto;
+}
+
+.adminInlineNotice,
+.adminSuccessNotice {
+  padding: 14px 16px;
+  border-radius: 10px;
+  line-height: 1.6;
+}
+
+.adminInlineNotice {
+  background: rgba(34, 102, 116, 0.1);
+  border: 1px solid rgba(34, 102, 116, 0.18);
+  color: #226674;
+}
+
+.adminSuccessNotice {
+  background: rgba(126, 217, 87, 0.14);
+  border: 1px solid rgba(76, 152, 45, 0.22);
+  color: #356d24;
+  font-weight: 700;
+}
+
+.adminCategoryManager {
+  display: grid;
+  gap: 18px;
+}
+
+.adminCategoryList {
+  display: grid;
+  gap: 16px;
+}
+
+.adminCategoryCard {
+  display: grid;
+  gap: 16px;
+  padding: 18px;
+  border: 1px solid rgba(30, 22, 28, 0.12);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.56);
+}
+
+.adminCategoryForm {
+  display: grid;
+  grid-template-columns: minmax(180px, 0.75fr) minmax(260px, 1fr);
+  gap: 18px;
+  align-items: start;
+}
+
+.adminCategoryForm label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+  color: var(--accent);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+}
+
+.adminCategoryForm input,
+.adminCategoryForm textarea {
+  width: 100%;
+  min-height: 46px;
+  padding: 13px 14px;
+  border: 1px solid rgba(30, 22, 28, 0.14);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.94);
+  color: var(--text);
+  font: inherit;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.adminCategoryForm input:disabled {
+  background: rgba(30, 22, 28, 0.04);
+  color: rgba(30, 22, 28, 0.62);
+}
+
+.adminCategoryForm textarea {
+  min-height: 118px;
+  line-height: 1.5;
+  resize: vertical;
+}
+
+.adminCategoryForm input:focus,
+.adminCategoryForm textarea:focus {
+  outline: none;
+  border-color: rgba(214, 70, 134, 0.55);
+  box-shadow: 0 0 0 4px rgba(214, 70, 134, 0.1);
+}
+
+.adminCategoryMove {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+
+.adminCategoryCount {
+  margin-right: auto;
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.adminCategoryMove .adminGhostBtn:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.adminCategoryActions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+
+.adminCategoryActions .primaryBtn,
+.adminCategoryActions .adminGhostBtn {
+  width: auto;
+  min-height: 44px;
+}
+
+@media (max-width: 1000px) {
+  .adminProductManager {
+    grid-template-columns: 1fr;
+  }
+
+  .adminProductSidebar {
+    max-height: none;
+  }
+}
+
+@media (max-width: 720px) {
+  .adminTabs {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .adminFormGrid,
+  .adminCategoryForm,
+  .adminProductToggles,
+  .adminSizeRow {
+    grid-template-columns: 1fr;
+  }
+
+  .adminProductFormHeader,
+  .adminProductSidebarHeader {
+    flex-direction: column;
+  }
+
+  .cartToast {
+    left: 16px;
+    right: 16px;
+    bottom: 16px;
+    width: auto;
+  }
 }
 
 /* COMPACT HOME */

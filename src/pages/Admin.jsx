@@ -1,13 +1,24 @@
 import { useState, useEffect } from "react";
+import { onAuthStateChanged } from "firebase/auth";
 
-import { loginWithGoogle } from "../services/authService";
+import { loginWithGoogle, logout } from "../services/authService";
 
 import { ADMIN_EMAILS } from "../config/adminEmails";
+import { auth } from "../firebase";
+import {
+  clearAdminSession,
+  hasActiveAdminSession,
+  startAdminSession,
+} from "../services/adminSessionService";
 
 import { getOrders, updateOrderStatus } from "../services/orderAdminService";
+import CategoryManager from "../components/admin/CategoryManager";
+import ProductManager from "../components/admin/ProductManager";
 
 export default function Admin() {
   const [user, setUser] = useState(null);
+  const [activePanel, setActivePanel] = useState("orders");
+  const [isCheckingSession, setIsCheckingSession] = useState(true);
 
   const [error, setError] = useState("");
 
@@ -22,15 +33,24 @@ export default function Admin() {
       const loggedInUser = await loginWithGoogle();
 
       if (!ADMIN_EMAILS.includes(loggedInUser.email)) {
+        clearAdminSession();
         setError("You are not authorized.");
 
         return;
       }
 
+      startAdminSession();
       setUser(loggedInUser);
+      setError("");
     } catch (err) {
       console.error(err);
     }
+  }
+
+  async function handleLogout() {
+    clearAdminSession();
+    setUser(null);
+    await logout();
   }
 
   async function handleStatusUpdate() {
@@ -79,6 +99,59 @@ export default function Admin() {
     }
   }, [user]);
 
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+      if (currentUser) {
+        if (!ADMIN_EMAILS.includes(currentUser.email)) {
+          clearAdminSession();
+          setUser(null);
+          setError("You are not authorized.");
+          await logout();
+
+          setIsCheckingSession(false);
+          return;
+        }
+
+        if (!hasActiveAdminSession()) {
+          startAdminSession();
+        }
+
+        setUser(currentUser);
+        setError("");
+      } else {
+        clearAdminSession();
+        setUser(null);
+      }
+
+      setIsCheckingSession(false);
+    });
+
+    return unsubscribe;
+  }, []);
+
+  useEffect(() => {
+    if (!user) {
+      return undefined;
+    }
+
+    const sessionTimer = window.setInterval(() => {
+      if (!hasActiveAdminSession()) {
+        handleLogout();
+      }
+    }, 30000);
+
+    return () => window.clearInterval(sessionTimer);
+  }, [user]);
+
+  if (isCheckingSession) {
+    return (
+      <section className="adminLogin">
+        <h1>Admin Login</h1>
+        <p>Checking admin session...</p>
+      </section>
+    );
+  }
+
   if (!user) {
     return (
       <section className="adminLogin">
@@ -109,14 +182,49 @@ export default function Admin() {
           <p>{user.email}</p>
         </div>
 
+        <div className="adminTabs" aria-label="Admin sections">
+          <button
+            type="button"
+            className={activePanel === "orders" ? "isActive" : ""}
+            onClick={() => setActivePanel("orders")}
+          >
+            Orders
+          </button>
+
+          <button
+            type="button"
+            className={activePanel === "products" ? "isActive" : ""}
+            onClick={() => setActivePanel("products")}
+          >
+            Products
+          </button>
+
+          <button
+            type="button"
+            className={activePanel === "categories" ? "isActive" : ""}
+            onClick={() => setActivePanel("categories")}
+          >
+            Categories
+          </button>
+        </div>
+
         <div className="adminStats">
           <div className="adminStatCard">
             <span>Total Orders</span>
             <strong>{orders.length}</strong>
           </div>
+
+          <button className="adminGhostBtn" type="button" onClick={handleLogout}>
+            Sign Out
+          </button>
         </div>
       </div>
 
+      {activePanel === "products" ? (
+        <ProductManager />
+      ) : activePanel === "categories" ? (
+        <CategoryManager />
+      ) : (
       <div className="adminDashboard">
         <aside className="adminSidebar">
           <h3 className="adminSectionTitle">Active Orders</h3>
@@ -343,6 +451,7 @@ export default function Admin() {
           )}
         </main>
       </div>
+      )}
     </section>
   );
 }

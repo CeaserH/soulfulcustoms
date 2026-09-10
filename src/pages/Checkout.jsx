@@ -5,6 +5,8 @@ import { useCart } from "../context/CartContext";
 import { uploadFile } from "../services/uploadService";
 
 import { createOrder } from "../services/orderService";
+import { getProductCatalog } from "../services/productService";
+import { isOutOfStock } from "../utils/stock";
 
 import { Link } from "react-router-dom";
 
@@ -240,6 +242,17 @@ export default function Checkout() {
     const paypalWindow = window.open("about:blank", "_blank");
 
     try {
+      const catalog = await getProductCatalog();
+      const unavailable = cart.find((item) => {
+        const product = catalog.find((entry) => String(entry.id) === String(item.id));
+        return !product || isOutOfStock(product);
+      });
+      if (unavailable) {
+        if (paypalWindow) paypalWindow.close();
+        setCheckoutError(`${unavailable.name} is temporarily out of stock. Please remove it from your cart to continue.`);
+        return;
+      }
+
       const orderNumber = generateOrderNumber();
 
       await createOrder(buildOrder(orderNumber));

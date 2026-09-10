@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useEffect } from "react";
+import { isOutOfStock } from "../utils/stock";
 
 const CartContext = createContext();
 
@@ -46,6 +47,8 @@ export function CartProvider({ children }) {
   };
 
   const addToCart = (product) => {
+    if (isOutOfStock(product)) return;
+
     setCart((prev) => {
       // Custom project products
       // ALWAYS create a new cart item

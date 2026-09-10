@@ -1,70 +1,41 @@
-import { useState } from "react";
-
-import products from "../data/products";
+import { useEffect, useState } from "react";
 
 import ProductCard from "../components/ProductCard";
 
 import ProductModal from "../components/ProductModal";
 
-const hiddenSaleCategories = new Set(["Father's Day", "Graduation"]);
-
-const categorySections = [
-  {
-    title: "Limited-Time Presale",
-    category: "Back To School Presale",
-    description:
-      "Back to school bundle pricing available 7/11-7/18 while presale is open.",
-  },
-  {
-    title: "Back To School",
-    category: "Back to School",
-    description:
-      "Personalized school essentials, including the limited-time presale bundle.",
-  },
-  {
-    title: "Glass Frames",
-    category: "Glass",
-    description:
-      "Premium glass keepsakes with vibrant photo reproduction and elegant display stands.",
-  },
-  {
-    title: "Slate Frames",
-    category: "Slate",
-    description:
-      "Natural stone photo displays crafted to preserve life's most meaningful moments.",
-  },
-  {
-    title: "Sports & Luggage Tags",
-    category: "Tags",
-    description:
-      "Personalized tags perfect for athletes, teams, travel, and everyday identification.",
-  },
-  {
-    title: "ID/Badge Holders",
-    category: "ID/Badge Holders",
-    description:
-      "Custom holders for IDs, work badges, and teacher badge inserts with single or 3-pack pricing.",
-  },
-  {
-    title: "Button Pins",
-    category: "Button Pins",
-    description:
-      "Personalized button pins available in multiple sizes and bundle quantities.",
-  },
-  {
-    title: "Home Goods",
-    category: "Home Goods",
-    description:
-      "Useful custom pieces for home gifting, kitchens, and everyday keepsakes.",
-  },
-];
+import useProducts from "../hooks/useProducts";
+import { getCategorySections } from "../services/categoryService";
 
 export default function Shop() {
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const [categorySections, setCategorySections] = useState([]);
 
-  const visibleProducts = products.filter(
-    (product) => !hiddenSaleCategories.has(product.category),
-  );
+  const { products, isLoading, error } = useProducts();
+
+  useEffect(() => {
+    let isMounted = true;
+
+    async function loadCategories() {
+      try {
+        const sections = await getCategorySections(products);
+
+        if (isMounted) {
+          setCategorySections(sections);
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    if (products.length > 0) {
+      loadCategories();
+    }
+
+    return () => {
+      isMounted = false;
+    };
+  }, [products]);
 
   return (
     <section className="shopPage">
@@ -80,8 +51,12 @@ export default function Shop() {
         </p>
       </div>
 
+      {isLoading && <div className="emptyCart">Loading products...</div>}
+
+      {error && <div className="checkoutErrorCard">{error}</div>}
+
       {categorySections.map((section) => {
-        const sectionProducts = visibleProducts.filter(
+        const sectionProducts = products.filter(
           (product) => product.category === section.category,
         );
 
@@ -108,7 +83,10 @@ export default function Shop() {
               {sectionProducts.map((product) => (
                 <ProductCard
                   key={product.id}
-                  product={product}
+                  product={{
+                    ...product,
+                    displayCategory: section.title,
+                  }}
                   onClick={() => setSelectedProduct(product)}
                 />
               ))}

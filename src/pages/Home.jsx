@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import ProductCard from "../components/ProductCard";
 import ProductModal from "../components/ProductModal";
-import products from "../data/products";
+import useProducts from "../hooks/useProducts";
 
 const glassLifestyle = new URL(
   "../assets/hero/lifestyle-glass-frame.png",
@@ -44,8 +44,6 @@ const heroTags = [
   "Button Pins",
   "Pot Holders",
 ];
-
-const hiddenSaleCategories = new Set(["Father's Day", "Graduation"]);
 
 const categoryHighlights = [
   {
@@ -152,16 +150,14 @@ const heroScenes = [
 export default function Home({ isCompact = false }) {
   const [selectedProduct, setSelectedProduct] = useState(null);
 
-  const visibleProducts = products.filter(
-    (product) => !hiddenSaleCategories.has(product.category),
-  );
+  const { products } = useProducts();
 
   const featuredProducts = [12, 1, 6]
-    .map((id) => visibleProducts.find((product) => product.id === id))
+    .map((id) => products.find((product) => product.id === id))
     .filter(Boolean);
 
   const galleryProducts = [1, 3, 4, 5, 6, 2]
-    .map((id) => visibleProducts.find((product) => product.id === id))
+    .map((id) => products.find((product) => product.id === id))
     .filter(Boolean);
 
   return (
@@ -247,7 +243,7 @@ export default function Home({ isCompact = false }) {
 
         <section className="homeCategoryGrid" aria-label="Shop by category">
           {categoryHighlights.map((category) => {
-            const count = visibleProducts.filter(
+            const count = products.filter(
               (product) => product.category === category.category,
             ).length;
 

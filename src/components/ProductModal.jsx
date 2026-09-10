@@ -1,9 +1,11 @@
 import { useState } from "react";
 
 import { useCart } from "../context/CartContext";
+import { isOutOfStock } from "../utils/stock";
 
 export default function ProductModal({ product, onClose }) {
   const { addToCart } = useCart();
+  const outOfStock = isOutOfStock(product);
 
   const sizeOptionLabel = product.sizeOptionLabel || "Choose Size";
   const styleOptionLabel =
@@ -11,8 +13,9 @@ export default function ProductModal({ product, onClose }) {
     (product.category === "Tags" ? "Choose Tag Style" : "Choose Style");
   const quantityOptionLabel = product.quantityLabel || "Choose Quantity";
   const personalization = product.personalization;
-  const hasMultipleSizeOptions = (product.options.sizes?.length || 0) > 1;
-  const hasMultipleStyleOptions = (product.options.styles?.length || 0) > 1;
+  const productOptions = product.options || {};
+  const hasMultipleSizeOptions = (productOptions.sizes?.length || 0) > 1;
+  const hasMultipleStyleOptions = (productOptions.styles?.length || 0) > 1;
   const shouldHideDetailSize =
     hasMultipleSizeOptions || hasMultipleStyleOptions;
   const visibleDetails =
@@ -24,23 +27,23 @@ export default function ProductModal({ product, onClose }) {
       return !["size", "sizes"].includes(detail.label.toLowerCase());
     }) || [];
   const hasVisualStyleOptions = Boolean(
-    product.options.visualStyles?.length && product.options.quantities?.length,
+    productOptions.visualStyles?.length && productOptions.quantities?.length,
   );
 
-  const defaultOption = product.options.sizes
-    ? product.options.sizes[0]
-    : product.options.styles?.[0];
+  const defaultOption = productOptions.sizes
+    ? productOptions.sizes[0]
+    : productOptions.styles?.[0];
 
   const [selectedOption, setSelectedOption] = useState(defaultOption);
 
   const [selectedVisualStyles, setSelectedVisualStyles] = useState(
-    product.options.visualStyles ? [product.options.visualStyles[0]] : [],
+    productOptions.visualStyles ? [productOptions.visualStyles[0]] : [],
   );
 
   const [activeVisualStyleIndex, setActiveVisualStyleIndex] = useState(0);
 
   const [selectedQuantity, setSelectedQuantity] = useState(
-    product.options.quantities?.[0],
+    productOptions.quantities?.[0],
   );
 
   const [childName, setChildName] = useState("");
@@ -53,7 +56,7 @@ export default function ProductModal({ product, onClose }) {
     selectedQuantity?.id === "three-pack" ? 3 : 1;
   const activeVisualStyles = hasVisualStyleOptions
     ? Array.from({ length: selectedBadgeCount }, (_, index) =>
-        selectedVisualStyles[index] || product.options.visualStyles[0],
+        selectedVisualStyles[index] || productOptions.visualStyles[0],
       )
     : [];
   const selectedStyleLabels = activeVisualStyles.map((style) => style.label);
@@ -82,7 +85,11 @@ export default function ProductModal({ product, onClose }) {
         quantityLabel: selectedQuantity.label,
         image: activeVisualStyles[0].image,
       }
-    : selectedOption;
+    : selectedOption || {
+        label: product.name,
+        description: product.description,
+        price: product.basePrice,
+      };
 
   function handleVisualStyleSelect(style) {
     setSelectedVisualStyles((currentStyles) => {
@@ -99,7 +106,7 @@ export default function ProductModal({ product, onClose }) {
   }
 
   function handleQuantityChange(quantityId) {
-    const nextQuantity = product.options.quantities.find(
+    const nextQuantity = productOptions.quantities.find(
       (quantity) => quantity.id === quantityId,
     );
     const nextCount = nextQuantity.id === "three-pack" ? 3 : 1;
@@ -108,7 +115,7 @@ export default function ProductModal({ product, onClose }) {
     setSelectedVisualStyles((currentStyles) =>
       Array.from(
         { length: nextCount },
-        (_, index) => currentStyles[index] || product.options.visualStyles[0],
+        (_, index) => currentStyles[index] || productOptions.visualStyles[0],
       ),
     );
     setActiveVisualStyleIndex((currentIndex) =>
@@ -117,6 +124,8 @@ export default function ProductModal({ product, onClose }) {
   }
 
   function handleAddToCart() {
+    if (outOfStock) return;
+
     if (product.requiresChildName && !childName.trim()) {
       alert("Please enter the child's name.");
 
@@ -181,15 +190,15 @@ export default function ProductModal({ product, onClose }) {
             <p>{product.description}</p>
           )}
 
-          {product.options.sizes?.length > 1 && (
+          {productOptions.sizes?.length > 1 && (
             <>
-              {product.options.sizes.length === 1 ? (
+              {productOptions.sizes.length === 1 ? (
                 <div className="optionGroup">
                   <label>Size</label>
 
                   <div className="singleOptionDisplay">
-                    {product.options.sizes[0].dimensions ||
-                      product.options.sizes[0].label}
+                    {productOptions.sizes[0].dimensions ||
+                      productOptions.sizes[0].label}
                   </div>
                 </div>
               ) : (
@@ -200,13 +209,13 @@ export default function ProductModal({ product, onClose }) {
                     value={selected.label}
                     onChange={(e) =>
                       setSelectedOption(
-                        product.options.sizes.find(
+                        productOptions.sizes.find(
                           (s) => s.label === e.target.value,
                         ),
                       )
                     }
                   >
-                    {product.options.sizes.map((size) => (
+                    {productOptions.sizes.map((size) => (
                       <option key={size.label} value={size.label}>
                         {size.label}
                         {" • "}
@@ -221,7 +230,7 @@ export default function ProductModal({ product, onClose }) {
             </>
           )}
 
-          {product.options.styles && (
+          {productOptions.styles && (
             <div className="optionGroup">
               <label>{styleOptionLabel}</label>
 
@@ -229,11 +238,11 @@ export default function ProductModal({ product, onClose }) {
                 value={selected.id}
                 onChange={(e) =>
                   setSelectedOption(
-                    product.options.styles.find((s) => s.id === e.target.value),
+                    productOptions.styles.find((s) => s.id === e.target.value),
                   )
                 }
               >
-                {product.options.styles.map((style) => (
+                {productOptions.styles.map((style) => (
                   <option key={style.id} value={style.id}>
                     {style.label}
                   </option>
@@ -266,7 +275,7 @@ export default function ProductModal({ product, onClose }) {
                 )}
 
                 <div className="badgeStyleGrid">
-                  {product.options.visualStyles.map((style) => (
+                  {productOptions.visualStyles.map((style) => (
                     <button
                       type="button"
                       className={`badgeStyleOption${
@@ -294,7 +303,7 @@ export default function ProductModal({ product, onClose }) {
                   value={selectedQuantity.id}
                   onChange={(e) => handleQuantityChange(e.target.value)}
                 >
-                  {product.options.quantities.map((quantity) => (
+                  {productOptions.quantities.map((quantity) => (
                     <option key={quantity.id} value={quantity.id}>
                       {quantity.label}
                       {" - $"}
@@ -340,19 +349,19 @@ export default function ProductModal({ product, onClose }) {
             </div>
           )}
 
-          {selected.description && (
+          {selected?.description && (
             <div className="optionDescription">{selected.description}</div>
           )}
 
           <div className="modalPriceBlock">
             <span>Price</span>
 
-            <h3 className="modalPrice">${selected.price.toFixed(2)}</h3>
+            <h3 className="modalPrice">${Number(selected.price).toFixed(2)}</h3>
           </div>
 
           <div className="heroButtons">
-            <button className="primaryBtn" onClick={handleAddToCart}>
-              Add To Cart
+            <button className="primaryBtn" onClick={handleAddToCart} disabled={outOfStock}>
+              {outOfStock ? "Temporarily Out Of Stock" : "Add To Cart"}
             </button>
           </div>
         </div>
