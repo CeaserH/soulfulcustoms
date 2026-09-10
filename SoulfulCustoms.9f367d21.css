@@ -146,6 +146,35 @@ nav a {
   display: flex;
 }
 
+.navRight {
+  align-items: center;
+  gap: 12px;
+  display: flex;
+}
+
+.adminPortalLink {
+  color: #fffc;
+  min-height: 44px;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  background: #ffffff0a;
+  border: 1px solid #ffffff14;
+  border-radius: 999px;
+  justify-content: center;
+  align-items: center;
+  padding: 0 16px;
+  font-size: .72rem;
+  font-weight: 800;
+  transition: background .2s, border-color .2s, color .2s;
+  display: inline-flex;
+}
+
+.adminPortalLink:hover, .adminPortalLink.isActive {
+  color: var(--accent-hover);
+  background: #d44c7f1f;
+  border-color: #d44c7f47;
+}
+
 .cartCount {
   background: var(--gradient);
   border-radius: 50%;
@@ -164,22 +193,23 @@ nav a {
 
 .cartToast {
   z-index: 9999;
-  background: #0a0a0af2;
-  border: 1px solid #2bbeb259;
-  border-radius: 18px;
+  background: #fffdf9f5;
+  border: 1px solid #d6468638;
+  border-radius: 12px;
   align-items: center;
   gap: 12px;
-  padding: 16px 20px;
+  width: min(330px, 100% - 40px);
+  padding: 16px 18px;
   animation: .25s toastIn;
   display: flex;
   position: absolute;
   bottom: 20px;
   right: 20px;
-  box-shadow: 0 12px 40px #00000059;
+  box-shadow: 0 18px 48px #33232b2e;
 }
 
 .cartToastIcon {
-  background: var(--accent-hover);
+  background: linear-gradient(135deg, var(--accent), var(--accent-dark));
   color: #fff;
   border-radius: 50%;
   justify-content: center;
@@ -190,10 +220,16 @@ nav a {
   display: flex;
 }
 
+.cartToast strong {
+  color: var(--text);
+  font-size: .95rem;
+}
+
 .cartToast p {
-  opacity: .8;
+  color: var(--muted);
   margin: 4px 0 0;
   font-size: .9rem;
+  line-height: 1.45;
 }
 
 @keyframes toastIn {
@@ -2099,6 +2135,17 @@ nav a {
     padding: 10px 16px;
   }
 
+  .navRight {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .adminPortalLink {
+    min-height: 42px;
+    padding: 0 14px;
+    font-size: .68rem;
+  }
+
   .luxHero {
     min-height: auto;
     padding: 190px 20px 80px;
@@ -2347,7 +2394,7 @@ body {
   box-shadow: 0 10px 34px #33232b12;
 }
 
-.navBrand, nav a, .secondaryBtn, .cartButton {
+.navBrand, nav a, .secondaryBtn, .cartButton, .adminPortalLink {
   color: var(--text);
 }
 
@@ -2362,6 +2409,12 @@ nav a:hover, .activeNav {
 }
 
 .cartButton {
+  background: #ffffffb8;
+  border-color: #1e161c1f;
+}
+
+.adminPortalLink {
+  color: var(--text);
   background: #ffffffb8;
   border-color: #1e161c1f;
 }
@@ -2560,6 +2613,373 @@ nav a:hover, .activeNav {
 .adminStatusControls select {
   color: var(--text);
   border-color: #1e161c1f;
+}
+
+.adminTabs {
+  background: #ffffffb3;
+  border: 1px solid #1e161c1f;
+  border-radius: 999px;
+  gap: 8px;
+  padding: 6px;
+  display: flex;
+}
+
+.adminTabs button, .adminGhostBtn {
+  cursor: pointer;
+  color: var(--text);
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  border: 0;
+  font-weight: 800;
+}
+
+.adminTabs button {
+  background: none;
+  border-radius: 999px;
+  padding: 10px 16px;
+  font-size: .72rem;
+}
+
+.adminTabs button.isActive {
+  background: var(--accent);
+  color: #fff;
+  box-shadow: 0 10px 24px #d6468638;
+}
+
+.adminProductManager {
+  grid-template-columns: 380px minmax(0, 1fr);
+  gap: 2rem;
+  display: grid;
+}
+
+.adminProductSidebar {
+  height: fit-content;
+  max-height: calc(100svh - 170px);
+  overflow: auto;
+}
+
+.adminProductSidebarHeader, .adminProductFormHeader {
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 18px;
+  display: flex;
+}
+
+.adminGhostBtn {
+  color: var(--accent);
+  background: #d646861a;
+  border-radius: 999px;
+  flex: none;
+  padding: 10px 14px;
+  font-size: .72rem;
+}
+
+.adminProductActions {
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 10px;
+  display: flex;
+}
+
+.adminDangerBtn {
+  color: #b53d4b;
+  background: #b53d4b1a;
+}
+
+.adminDangerBtn:hover {
+  background: #b53d4b29;
+}
+
+.adminProductListItem {
+  grid-template-columns: 54px minmax(0, 1fr) auto;
+  align-items: center;
+}
+
+.adminProductListItem img {
+  object-fit: cover;
+  border: 1px solid #1e161c1f;
+  border-radius: 8px;
+  width: 54px;
+  height: 54px;
+}
+
+.adminMutedText {
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.adminProductForm {
+  flex-direction: column;
+  gap: 22px;
+  display: flex;
+}
+
+.adminProductForm fieldset {
+  border: 0;
+  flex-direction: column;
+  gap: 22px;
+  min-width: 0;
+  display: flex;
+}
+
+.adminProductForm fieldset:disabled {
+  opacity: .58;
+}
+
+.adminFormGrid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  display: grid;
+}
+
+.adminFullField {
+  grid-column: 1 / -1;
+}
+
+.adminProductForm label, .adminProductToggles label, .adminSizeRow label {
+  color: var(--accent);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  flex-direction: column;
+  gap: 8px;
+  font-size: .72rem;
+  font-weight: 800;
+  display: flex;
+}
+
+.adminProductForm input, .adminProductForm select, .adminProductForm textarea {
+  width: 100%;
+  color: var(--text);
+  font: inherit;
+  letter-spacing: 0;
+  text-transform: none;
+  background: #ffffffeb;
+  border: 1px solid #1e161c24;
+  border-radius: 8px;
+  padding: 13px 14px;
+}
+
+.adminProductForm textarea {
+  resize: vertical;
+  min-height: 110px;
+}
+
+.adminProductForm input:focus, .adminProductForm select:focus, .adminProductForm textarea:focus {
+  border-color: #d646868c;
+  outline: none;
+  box-shadow: 0 0 0 4px #d646861a;
+}
+
+.adminImagePreview {
+  background: #ffffffb8;
+  border: 1px solid #1e161c1f;
+  border-radius: 10px;
+  align-self: end;
+  padding: 8px;
+}
+
+.adminImagePreview img {
+  object-fit: cover;
+  border-radius: 8px;
+  width: 100%;
+  height: 150px;
+}
+
+.adminProductOptions {
+  background: #ffffff80;
+  border: 1px solid #1e161c1f;
+  border-radius: 12px;
+  gap: 14px;
+  padding: 18px;
+  display: grid;
+}
+
+.adminSizeRow {
+  grid-template-columns: minmax(110px, .9fr) minmax(180px, 1.4fr) minmax(100px, .7fr) auto;
+  align-items: end;
+  gap: 12px;
+  display: grid;
+}
+
+.adminSizeRow .removeBtn {
+  height: 45px;
+}
+
+.adminProductToggles {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  display: grid;
+}
+
+.adminProductToggles .phraseCheckbox {
+  min-height: 45px;
+  color: var(--text);
+  letter-spacing: 0;
+  text-transform: none;
+  background: #ffffff9e;
+  border: 1px solid #1e161c1f;
+  border-radius: 8px;
+  flex-direction: row;
+  align-items: center;
+  padding: 12px 14px;
+}
+
+.adminProductToggles .phraseCheckbox input {
+  width: auto;
+}
+
+.adminInlineNotice, .adminSuccessNotice {
+  border-radius: 10px;
+  padding: 14px 16px;
+  line-height: 1.6;
+}
+
+.adminInlineNotice {
+  color: #226674;
+  background: #2266741a;
+  border: 1px solid #2266742e;
+}
+
+.adminSuccessNotice {
+  color: #356d24;
+  background: #7ed95724;
+  border: 1px solid #4c982d38;
+  font-weight: 700;
+}
+
+.adminCategoryManager {
+  gap: 18px;
+  display: grid;
+}
+
+.adminCategoryList {
+  gap: 16px;
+  display: grid;
+}
+
+.adminCategoryCard {
+  background: #ffffff8f;
+  border: 1px solid #1e161c1f;
+  border-radius: 12px;
+  gap: 16px;
+  padding: 18px;
+  display: grid;
+}
+
+.adminCategoryForm {
+  grid-template-columns: minmax(180px, .75fr) minmax(260px, 1fr);
+  align-items: start;
+  gap: 18px;
+  display: grid;
+}
+
+.adminCategoryForm label {
+  min-width: 0;
+  color: var(--accent);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  flex-direction: column;
+  gap: 8px;
+  font-size: .72rem;
+  font-weight: 800;
+  display: flex;
+}
+
+.adminCategoryForm input, .adminCategoryForm textarea {
+  width: 100%;
+  min-height: 46px;
+  color: var(--text);
+  font: inherit;
+  letter-spacing: 0;
+  text-transform: none;
+  background: #fffffff0;
+  border: 1px solid #1e161c24;
+  border-radius: 8px;
+  padding: 13px 14px;
+}
+
+.adminCategoryForm input:disabled {
+  color: #1e161c9e;
+  background: #1e161c0a;
+}
+
+.adminCategoryForm textarea {
+  resize: vertical;
+  min-height: 118px;
+  line-height: 1.5;
+}
+
+.adminCategoryForm input:focus, .adminCategoryForm textarea:focus {
+  border-color: #d646868c;
+  outline: none;
+  box-shadow: 0 0 0 4px #d646861a;
+}
+
+.adminCategoryMove {
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
+  display: flex;
+}
+
+.adminCategoryCount {
+  color: var(--muted);
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  margin-right: auto;
+  font-size: .78rem;
+  font-weight: 800;
+}
+
+.adminCategoryMove .adminGhostBtn:disabled {
+  cursor: not-allowed;
+  opacity: .45;
+}
+
+.adminCategoryActions {
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 10px;
+  display: flex;
+}
+
+.adminCategoryActions .primaryBtn, .adminCategoryActions .adminGhostBtn {
+  width: auto;
+  min-height: 44px;
+}
+
+@media (width <= 1000px) {
+  .adminProductManager {
+    grid-template-columns: 1fr;
+  }
+
+  .adminProductSidebar {
+    max-height: none;
+  }
+}
+
+@media (width <= 720px) {
+  .adminTabs {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .adminFormGrid, .adminCategoryForm, .adminProductToggles, .adminSizeRow {
+    grid-template-columns: 1fr;
+  }
+
+  .adminProductFormHeader, .adminProductSidebarHeader {
+    flex-direction: column;
+  }
+
+  .cartToast {
+    width: auto;
+    bottom: 16px;
+    left: 16px;
+    right: 16px;
+  }
 }
 
 .luxHeroCompact {
